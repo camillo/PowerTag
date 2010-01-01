@@ -22,12 +22,9 @@ Public Class Set_Tag : Inherits EditTagBase
         If TryGetTaglibProperty(name, tagProperty) Then
             Dim valueObj = Prop.GetValue(Me, Nothing)
             If Not valueObj Is Nothing Then
-                Dim userValue = valueObj.ToString
-                Dim realValue = ExtractValue(userValue, TargetFile)
-                Dim tag = TargetFile.Tag
                 If tagProperty.CanWrite Then
-                    Me.WriteVerbose("set property '{0}' to '{1}'", name, realValue)
-                    tagProperty.SetValue(tag, realValue, Nothing)
+                    Me.WriteVerbose("set property '{0}' to '{1}'", name, valueObj)
+                    SetProperty(tagProperty, valueObj, TargetFile)
                 Else
                     Me.WriteWarning("property {0} is not writable.", name)
                 End If
@@ -37,6 +34,28 @@ Public Class Set_Tag : Inherits EditTagBase
         Else
             Me.WriteVerbose("nothing to do '{0}' (no matching taglib property", name)
         End If
+    End Sub
+
+    Private Sub SetProperty(ByVal TagProperty As Reflection.PropertyInfo, ByVal ValueObj As Object, ByVal TargetFile As TagLib.File)
+        Dim TagPropertyType = TagProperty.PropertyType
+        Dim realValue As Object
+        If TagPropertyType.Equals(GetType(String)) Then
+            realValue = ExtractValue(ValueObj.ToString, TargetFile)
+        ElseIf TagPropertyType.Equals(GetType(String())) Then
+            Dim valueList = New List(Of String)
+            For Each value In ValueObj.ToString.Split(";"c)
+                valueList.Add(ExtractValue(value, TargetFile))
+            Next
+            realValue = valueList.ToArray
+        ElseIf TagPropertyType.Equals(GetType(UInteger)) Then
+            Dim value As UInteger
+            If Not UInteger.TryParse(ValueObj.ToString, value) Then Throw New ArgumentException(String.Format("cannot parse value '{0}' to UInteger", ValueObj))
+            realValue = value
+        Else
+            Throw New InternalException(String.Concat("unknown tagtype ", TagPropertyType.Name))
+        End If
+        Dim tag = TargetFile.Tag
+        TagProperty.SetValue(tag, realValue, Nothing)
     End Sub
 
     Private Function ExtractValue(ByVal Value As String, ByVal TargetFile As TagLib.File) As String
