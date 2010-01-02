@@ -10,7 +10,9 @@ Public Class Get_Tag : Inherits CmdLetBase
         If String.IsNullOrEmpty(parameterFileName) Then
             Dim sessionPath = Me.SessionState.Path.CurrentLocation.Path
             Me.WriteVerbose("No filename given. Use files in '{0}'", sessionPath)
-            TargetFiles = IO.Directory.GetFiles(sessionPath)
+            Dim FileList = New List(Of String)
+            FillFileList(sessionPath, FileList, Me.Recursive.IsPresent)
+            TargetFiles = FileList
         Else
             TargetFiles = New String() {parameterFileName}
         End If
@@ -38,6 +40,31 @@ Public Class Get_Tag : Inherits CmdLetBase
         Next
 
     End Sub
+
+    Private Sub FillFileList(ByVal Directory As String, ByVal FileList As List(Of String), ByVal Recursive As Boolean)
+        Try
+            FileList.AddRange(System.IO.Directory.GetFiles(Directory))
+            If Recursive Then
+                For Each currentDirectory In System.IO.Directory.GetDirectories(Directory)
+                    FillFileList(currentDirectory, FileList, Recursive)
+                Next
+            End If
+        Catch ex As Exception
+            Me.WriteWarning("error, scanning directory: '{0}' - {1}", Directory, ex.Message)
+        End Try
+    End Sub
+
+    Private myRecursive As SwitchParameter
+    <Parameter()> _
+    Public Property Recursive() As SwitchParameter
+        Get
+            Return myRecursive
+        End Get
+        Set(ByVal value As SwitchParameter)
+            myRecursive = value
+        End Set
+    End Property
+
 
     <Parameter(Position:=0, Mandatory:=False, ValueFromPipeline:=True, HelpMessage:=HelpMessageFileName)> _
     Public Property FileName() As String

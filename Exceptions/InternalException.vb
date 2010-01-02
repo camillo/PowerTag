@@ -3,6 +3,11 @@
 Public Class InternalException
     Inherits System.Exception
 
+    Public Sub New(ByVal message As String, ByVal ParamArray Args() As Object)
+        Me.New(String.Format(message, Args))
+    End Sub
+
+
     Public Sub New(ByVal message As String)
         MyBase.New(message)
     End Sub

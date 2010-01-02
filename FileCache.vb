@@ -1,5 +1,5 @@
-﻿Public Class FileCache : Inherits Dictionary(Of String, TagLib.File)
-    Private Shared Instance As FileCache = New FileCache
+﻿Public Class FileCache
+    Private Shared Instance As Dictionary(Of String, TagLib.File) = New Dictionary(Of String, TagLib.File)
     Private Sub New()
     End Sub
 
@@ -24,6 +24,23 @@
         Next
         If back Is Nothing Then Throw New FileNotFoundException("No file found for given tag.")
         Return back
+    End Function
+
+    Public Shared Sub Remove(ByVal Filename As String)
+        Instance.Remove(Filename)
+    End Sub
+
+    Public Shared Sub Remove(ByVal Tag As TagLib.Tag)
+        Dim filename = GetFile(Tag).Name
+        Remove(filename)
+    End Sub
+
+    Friend Shared Sub Clear()
+        Instance.Clear()
+    End Sub
+
+    Friend Shared Function Contains(ByVal Filename As String) As Boolean
+        Return Instance.ContainsKey(Filename)
     End Function
 
     <Serializable()> _

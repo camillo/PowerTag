@@ -5,30 +5,29 @@
     Private Const HelpMessageTag As String = "target tag for operation"
 
     Protected Overrides Sub DoProcessRecord()
+
         Try
-            Dim targetFile As TagLib.File
+            Dim targetFile = GetTargetFile()
+            Dim filename = targetFile.Name
 
-            Select Case Me.ParameterSetName
-                Case TagParaneterSetName
-                    targetFile = FileCache.GetFile(Me.Tag)
-                Case DefaultParameterSetName
-                    targetFile = FileCache.GetFile(Me.FileName)
-                Case Else
-                    Throw New InternalException(String.Format("unknown Parametersetname {0}", Me.ParameterSetName))
-            End Select
+            Dim needSave = DoEdit(targetFile)
 
-            DoEdit(targetFile)
-
-            If Me.NeedSave Then
+            If needSave _
+              AndAlso (Not WhatIfMode = WhatIfModes.true) _
+              AndAlso (WhatIfMode = WhatIfModes.false OrElse ShouldProcess(targetFile.Name)) Then
+                Me.WriteVerbose("saving '{0}'", targetFile.Name)
                 targetFile.Save()
             End If
 
             If Me.PassThru.IsPresent Then
+                targetFile = FileCache.GetFile(filename)
                 Me.WriteObject(targetFile.Tag)
             End If
 
         Catch ex As System.IO.FileNotFoundException
             Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.ObjectNotFound, FileName))
+        Catch ex As FileCache.FileNotFoundException
+            Throw New InternalException("requestet file for given tag not found", ex)
         Catch ex As TagLibException
             Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.InvalidResult, FileName))
         Catch ex As TagLib.UnsupportedFormatException
@@ -39,15 +38,30 @@
 
     End Sub
 
-    Protected Overridable Sub DoEdit(ByVal TargetFile As TagLib.File)
+    Private Function GetTargetFile() As TagLib.File
+        Dim back As TagLib.File
+        Select Case Me.ParameterSetName
+            Case TagParaneterSetName
+                back = FileCache.GetFile(Me.Tag)
+            Case DefaultParameterSetName
+                back = FileCache.GetFile(Me.FileName)
+            Case Else
+                Throw New InternalException(String.Format("unknown Parametersetname {0}", Me.ParameterSetName))
+        End Select
+        Return back
+    End Function
 
-    End Sub
+    ''' <summary>is overriden by children to perform the edit task </summary>
+    ''' <param name="TargetFile">file, that's tag will be edited</param>
+    ''' <returns>true, if cmdlet should save TargetFile; false otherwise</returns>
+    Protected Overridable Function DoEdit(ByVal TargetFile As TagLib.File) As Boolean
+        Return True
+    End Function
 
 #Region "Parameter"
-    Private myFileName As String
-    Private myTag As TagLib.Tag
 
-    <Parameter(Position:=0, Mandatory:=True, ParameterSetName:=DefaultParameterSetName, ValueFromPipeline:=True, HelpMessage:=HelpMessageFileName)> _
+    Private myFileName As String
+    <Parameter(Mandatory:=True, ParameterSetName:=DefaultParameterSetName, ValueFromPipeline:=True, HelpMessage:=HelpMessageFileName)> _
     Public Property FileName() As String
         Get
             Return myFileName
@@ -57,7 +71,8 @@
         End Set
     End Property
 
-    <Parameter(Position:=0, Mandatory:=True, ParameterSetName:=TagParaneterSetName, ValueFromPipeline:=True, HelpMessage:=HelpMessageTag)> _
+    Private myTag As TagLib.Tag
+    <Parameter(Mandatory:=True, ParameterSetName:=TagParaneterSetName, ValueFromPipeline:=True, HelpMessage:=HelpMessageTag)> _
     Public Property Tag() As TagLib.Tag
         Get
             Return myTag
@@ -78,22 +93,7 @@
         End Set
     End Property
 
-    Private myVirtual As SwitchParameter
-    <Parameter()> _
-    Public Property Virtual() As SwitchParameter
-        Get
-            Return myVirtual
-        End Get
-        Set(ByVal value As SwitchParameter)
-            myVirtual = value
-        End Set
-    End Property
-
-    Protected ReadOnly Property NeedSave() As Boolean
-        Get
-            Return Not Me.Virtual.IsPresent
-        End Get
-    End Property
 #End Region
+
 
 End Class

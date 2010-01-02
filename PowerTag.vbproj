@@ -77,9 +77,15 @@
     <Import Include="System.Management.Automation" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdLets\BaseClasses\SetTagWrapperBase.vb" />
+    <Compile Include="CmdLets\Clear-TagCache.vb" />
     <Compile Include="CmdLets\Clear-Tag.vb" />
-    <Compile Include="CmdLets\CmdLetBase.vb" />
-    <Compile Include="CmdLets\EditTagBase.vb" />
+    <Compile Include="CmdLets\BaseClasses\CmdLetBase.vb" />
+    <Compile Include="CmdLets\Wrapper\SetTagCmdlets.vb" />
+    <Compile Include="Do-Test.vb" />
+    <Compile Include="CmdLets\BaseClasses\EditTagBase.vb" />
+    <Compile Include="CmdLets\Reset-Tag.vb" />
+    <Compile Include="CmdLets\Save-Tag.vb" />
     <Compile Include="CmdLets\Set-Tag.vb" />
     <Compile Include="CmdLets\Get-Tag.vb" />
     <Compile Include="Exceptions\InternalException.vb" />
@@ -103,7 +109,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FileCache.vb" />
+    <Compile Include="TaglibParameterAttribute.vb" />
     <Compile Include="TagNounes.vb" />
+    <Compile Include="TagVerbs.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
