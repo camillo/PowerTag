@@ -26,23 +26,6 @@
         End Set
     End Property
 
-    Protected Enum WhatIfModes
-        none = 0
-        [true]
-        [false]
-    End Enum
-
-    Private Shared myWhatifMode As WhatIfModes = WhatIfModes.none
-    Protected Shared Property WhatIfMode() As WhatIfModes
-        Get
-            Return myWhatifMode
-        End Get
-        Set(ByVal value As WhatIfModes)
-            myWhatifMode = value
-        End Set
-    End Property
-
-
     Protected Overridable Sub DoProcessRecord()
     End Sub
 

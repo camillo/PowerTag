@@ -1,4 +1,4 @@
-﻿Public MustInherit Class SetTagWrapperBase : Inherits EditTagBase
+﻿Public MustInherit Class SetTagWrapperBase : Inherits EditTagCmdLetBase
     Private myWrappedPropertyName As String
     Protected Sub New()
         Dim attr = Me.GetType.GetCustomAttributes(GetType(CmdletAttribute), True)
@@ -10,7 +10,7 @@
         Me.myWrappedPropertyName = WrappedPropertyName
     End Sub
 
-    Protected Overrides Function DoEdit(ByVal TargetFile As TagLib.File) As Boolean
+    Protected Overrides Function ProcessEditTag(ByVal TargetFile As TagLib.File) As Boolean
 
         Dim input As Object
         Dim tmp As KeyValuePair(Of Reflection.PropertyInfo, TaglibParameterAttribute) = Nothing

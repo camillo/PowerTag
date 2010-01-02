@@ -1,29 +1,14 @@
-﻿Public MustInherit Class EditTagBase : Inherits CmdLetBase
+﻿Public MustInherit Class TagCmdLetBase : Inherits CmdLetBase
     Public Const DefaultParameterSetName As String = "byFilenName"
-    Public Const TagParaneterSetName As String = "byTag"
     Private Const HelpMessageFileName As String = "path to mediafile (mp3,ogg...)"
+    Public Const TagParaneterSetName As String = "byTag"
     Private Const HelpMessageTag As String = "target tag for operation"
 
     Protected Overrides Sub DoProcessRecord()
-
         Try
             Dim targetFile = GetTargetFile()
             Dim filename = targetFile.Name
-
-            Dim needSave = DoEdit(targetFile)
-
-            If needSave _
-              AndAlso (Not WhatIfMode = WhatIfModes.true) _
-              AndAlso (WhatIfMode = WhatIfModes.false OrElse ShouldProcess(targetFile.Name)) Then
-                Me.WriteVerbose("saving '{0}'", targetFile.Name)
-                targetFile.Save()
-            End If
-
-            If Me.PassThru.IsPresent Then
-                targetFile = FileCache.GetFile(filename)
-                Me.WriteObject(targetFile.Tag)
-            End If
-
+            ProcessTag(targetFile)
         Catch ex As System.IO.FileNotFoundException
             Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.ObjectNotFound, FileName))
         Catch ex As FileCache.FileNotFoundException
@@ -35,7 +20,9 @@
         Catch ex As TagLib.CorruptFileException
             Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.InvalidData, FileName))
         End Try
+    End Sub
 
+    Protected Overridable Sub ProcessTag(ByVal TargetFile As TagLib.File)
     End Sub
 
     Private Function GetTargetFile() As TagLib.File
@@ -49,13 +36,6 @@
                 Throw New InternalException(String.Format("unknown Parametersetname {0}", Me.ParameterSetName))
         End Select
         Return back
-    End Function
-
-    ''' <summary>is overriden by children to perform the edit task </summary>
-    ''' <param name="TargetFile">file, that's tag will be edited</param>
-    ''' <returns>true, if cmdlet should save TargetFile; false otherwise</returns>
-    Protected Overridable Function DoEdit(ByVal TargetFile As TagLib.File) As Boolean
-        Return True
     End Function
 
 #Region "Parameter"
@@ -82,18 +62,7 @@
         End Set
     End Property
 
-    Private myPassThru As SwitchParameter
-    <Parameter()> _
-    Public Property PassThru() As SwitchParameter
-        Get
-            Return myPassThru
-        End Get
-        Set(ByVal value As SwitchParameter)
-            myPassThru = value
-        End Set
-    End Property
 
 #End Region
-
 
 End Class

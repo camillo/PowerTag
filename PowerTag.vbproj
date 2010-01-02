@@ -77,13 +77,16 @@
     <Import Include="System.Management.Automation" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdLets\BaseClasses\GetTagWrapperBase.vb" />
     <Compile Include="CmdLets\BaseClasses\SetTagWrapperBase.vb" />
+    <Compile Include="CmdLets\BaseClasses\TagCmdLetBase.vb" />
     <Compile Include="CmdLets\Clear-TagCache.vb" />
     <Compile Include="CmdLets\Clear-Tag.vb" />
     <Compile Include="CmdLets\BaseClasses\CmdLetBase.vb" />
+    <Compile Include="CmdLets\Wrapper\GetTagCmdlets.vb" />
     <Compile Include="CmdLets\Wrapper\SetTagCmdlets.vb" />
     <Compile Include="Do-Test.vb" />
-    <Compile Include="CmdLets\BaseClasses\EditTagBase.vb" />
+    <Compile Include="CmdLets\BaseClasses\EditTagCmdLetBase.vb" />
     <Compile Include="CmdLets\Reset-Tag.vb" />
     <Compile Include="CmdLets\Save-Tag.vb" />
     <Compile Include="CmdLets\Set-Tag.vb" />

@@ -1,8 +1,8 @@
 ﻿Imports System.Text.RegularExpressions
 <Cmdlet(VerbsCommon.Set, TagNounes.Tag, _
         SupportsShouldProcess:=True, DefaultParameterSetName:=Set_Tag.DefaultParameterSetName)> _
-Public Class Set_Tag : Inherits EditTagBase
-    Protected Overrides Function DoEdit(ByVal TargetFile As TagLib.File) As Boolean
+Public Class Set_Tag : Inherits EditTagCmdLetBase
+    Protected Overrides Function ProcessEditTag(ByVal TargetFile As TagLib.File) As Boolean
         Dim back As Boolean
         Try
             SetRegexParameter(TargetFile)
