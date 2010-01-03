@@ -44,3 +44,34 @@ Public Class Do_Test : Inherits PSCmdlet
     End Property
 
 End Class
+
+<Cmdlet("Do", "Bla")> _
+Public Class dobla : Inherits CmdLetBase
+    Protected Overrides Sub DoProcessRecord()
+        Dim a = Tag.Create(Me.Value)
+        Me.WriteObject(a)
+    End Sub
+
+    Private myValue As String
+    <Parameter(Position:=0)> _
+    Public Property Value() As String
+        Get
+            Return myValue
+        End Get
+        Set(ByVal value As String)
+            myValue = value
+        End Set
+    End Property
+
+    Private myForece As SwitchParameter
+    <Parameter()> _
+    Public Property Force() As SwitchParameter
+        Get
+            Return myForece
+        End Get
+        Set(ByVal value As SwitchParameter)
+            myForece = value
+        End Set
+    End Property
+
+End Class

@@ -4,6 +4,8 @@
     Protected Overrides Sub ProcessRecord()
         Try
             DoProcessRecord()
+        Catch ex As ArgumentException
+            Me.WriteError(New ErrorRecord(ex, "Argument", ErrorCategory.InvalidArgument, TargetObject))
         Catch ex As PipelineStoppedException
             Me.Host.UI.WriteLine(ex.Message)
         Catch ex As InternalException

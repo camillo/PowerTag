@@ -5,11 +5,12 @@
 
     Public Shared Function GetFile(ByVal FileName As String) As TagLib.File
         Dim back As TagLib.File = Nothing
-        If Not Instance.TryGetValue(FileName, back) Then
-            If Not System.IO.File.Exists(FileName) Then Throw New System.IO.FileNotFoundException("File not found", FileName)
-            back = TagLib.File.Create(FileName)
+        Dim FullPath = System.IO.Path.GetFullPath(FileName)
+        If Not Instance.TryGetValue(FullPath, back) Then
+            If Not System.IO.File.Exists(FullPath) Then Throw New System.IO.FileNotFoundException("File not found", FileName)
+            back = TagLib.File.Create(FullPath)
             If back Is Nothing Then Throw New TagLibException("TagLib.File.Create does not return a file object")
-            Instance.Add(FileName, back)
+            Instance.Add(FullPath, back)
         End If
         Return back
     End Function
@@ -22,7 +23,7 @@
                 Exit For
             End If
         Next
-        If back Is Nothing Then Throw New FileNotFoundException("No file found for given tag.")
+        If back Is Nothing Then Throw New MediaFileNotFoundException("No file found for given tag.")
         Return back
     End Function
 
@@ -44,7 +45,7 @@
     End Function
 
     <Serializable()> _
-    Public Class FileNotFoundException
+    Public Class MediaFileNotFoundException
         Inherits System.Exception
 
         Public Sub New(ByVal message As String)

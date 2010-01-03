@@ -83,6 +83,7 @@
     <Compile Include="CmdLets\Clear-TagCache.vb" />
     <Compile Include="CmdLets\Clear-Tag.vb" />
     <Compile Include="CmdLets\BaseClasses\CmdLetBase.vb" />
+    <Compile Include="CmdLets\Get-GenreList.vb" />
     <Compile Include="CmdLets\Wrapper\GetTagCmdlets.vb" />
     <Compile Include="CmdLets\Wrapper\SetTagCmdlets.vb" />
     <Compile Include="Do-Test.vb" />
@@ -115,6 +116,9 @@
     <Compile Include="TaglibParameterAttribute.vb" />
     <Compile Include="TagNounes.vb" />
     <Compile Include="TagVerbs.vb" />
+    <Compile Include="Tag\Tag.vb" />
+    <Compile Include="Tag\TagCache.vb" />
+    <Compile Include="Tag\TagFactory.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

@@ -13,8 +13,14 @@ Public Class Get_Tag : Inherits CmdLetBase
             Dim FileList = New List(Of String)
             FillFileList(sessionPath, FileList, Me.Recursive.IsPresent)
             TargetFiles = FileList
-        Else
+        ElseIf System.IO.Directory.Exists(parameterFileName) Then
+            Dim FileList = New List(Of String)
+            FillFileList(parameterFileName, FileList, Me.Recursive.IsPresent)
+            TargetFiles = FileList
+        ElseIf System.IO.File.Exists(parameterFileName) Then
             TargetFiles = New String() {parameterFileName}
+        Else
+            Throw New ArgumentException("Filename does not match a directory or file", "Filename")
         End If
 
         For Each currentFileName In TargetFiles
@@ -38,7 +44,6 @@ Public Class Get_Tag : Inherits CmdLetBase
                 Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.InvalidData, currentFileName))
             End Try
         Next
-
     End Sub
 
     Private Sub FillFileList(ByVal Directory As String, ByVal FileList As List(Of String), ByVal Recursive As Boolean)
@@ -64,7 +69,6 @@ Public Class Get_Tag : Inherits CmdLetBase
             myRecursive = value
         End Set
     End Property
-
 
     <Parameter(Position:=0, Mandatory:=False, ValueFromPipeline:=True, HelpMessage:=HelpMessageFileName)> _
     Public Property FileName() As String

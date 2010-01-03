@@ -7,6 +7,7 @@
     Public Const Album As String = "Album"
     Public Const Year As String = "Year"
     Public Const Genres As String = "Genres"
+    Public Const GenreList As String = "GenreList"
     Private Sub New()
     End Sub
 End Class

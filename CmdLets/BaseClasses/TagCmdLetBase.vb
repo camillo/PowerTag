@@ -11,7 +11,7 @@
             ProcessTag(targetFile)
         Catch ex As System.IO.FileNotFoundException
             Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.ObjectNotFound, FileName))
-        Catch ex As FileCache.FileNotFoundException
+        Catch ex As FileCache.MediaFileNotFoundException
             Throw New InternalException("requestet file for given tag not found", ex)
         Catch ex As TagLibException
             Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.InvalidResult, FileName))
