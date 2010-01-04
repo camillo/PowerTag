@@ -10,9 +10,9 @@
         Me.myWrappedPropertyName = WrappedPropertyName
     End Sub
 
-    Protected Overrides Function ProcessEditTag(ByVal TargetFile As TagLib.File) As Boolean
+    Protected Overrides Function ProcessEditTag(ByVal TargetTag As Tag) As Boolean
 
-        Dim input As Object
+        Dim input As IEnumerable
         Dim tmp As KeyValuePair(Of Reflection.PropertyInfo, TaglibParameterAttribute) = Nothing
         If Not Set_Tag.TryGetTaglibParemeter(myWrappedPropertyName, tmp) Then _
             Throw New InternalException("no property found for parameter '{0}'", myWrappedPropertyName)
@@ -22,11 +22,11 @@
             input = New Object() {value}
         ElseIf targetType.Equals(GetType(String())) Then
             If TypeOf value Is String() Then
-                input = value
+                input = New Object() {value}
             ElseIf TypeOf value Is IEnumerable(Of String) Then
-                input = value
+                input = New Object() {value}
             ElseIf TypeOf value Is Array Then
-                input = value
+                input = New Object() {value}
             Else
                 input = New Object() {value.ToString}
             End If
@@ -37,12 +37,12 @@
         Else
             Throw New InternalException("unknown parameter type '{0}'", targetType.FullName)
         End If
-        If ShouldProcess(TargetFile.Name, String.Format("set '{0}':'{1}'", myWrappedPropertyName, input)) Then
+        If ShouldProcess(TargetTag.Path, String.Format("set '{0}':'{1}'", myWrappedPropertyName, input)) Then
             WhatIfMode = WhatIfModes.false
         Else
             WhatIfMode = WhatIfModes.true
         End If
-        Dim command = String.Format("Set-Tag -Filename ""{0}"" -{1} $input", TargetFile.Name.Replace("""", """"""), myWrappedPropertyName)
+        Dim command = String.Format("Set-Tag -Filename ""{0}"" -{1} $input", TargetTag.Path.Replace("""", """"""), myWrappedPropertyName)
         Dim pipe = Runspaces.Runspace.DefaultRunspace.CreateNestedPipeline(command, False)
         Dim pipeResult = pipe.Invoke(input)
         Return True

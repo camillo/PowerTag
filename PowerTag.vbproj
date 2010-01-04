@@ -15,7 +15,7 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
-    <OptionStrict>Off</OptionStrict>
+    <OptionStrict>On</OptionStrict>
     <OptionInfer>On</OptionInfer>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
@@ -42,7 +42,8 @@
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>PowerTag.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn></NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -51,7 +52,8 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>PowerTag.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn></NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -84,6 +86,7 @@
     <Compile Include="CmdLets\Clear-Tag.vb" />
     <Compile Include="CmdLets\BaseClasses\CmdLetBase.vb" />
     <Compile Include="CmdLets\Get-GenreList.vb" />
+    <Compile Include="CmdLets\Get-MediaFile.vb" />
     <Compile Include="CmdLets\Wrapper\GetTagCmdlets.vb" />
     <Compile Include="CmdLets\Wrapper\SetTagCmdlets.vb" />
     <Compile Include="Do-Test.vb" />
@@ -112,13 +115,15 @@
     <Compile Include="PSSnapIn.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FileCache.vb" />
     <Compile Include="TaglibParameterAttribute.vb" />
     <Compile Include="TagNounes.vb" />
     <Compile Include="TagVerbs.vb" />
+    <Compile Include="Tag\AudioTag.vb" />
+    <Compile Include="Tag\AudioVideoTag.vb" />
     <Compile Include="Tag\Tag.vb" />
     <Compile Include="Tag\TagCache.vb" />
     <Compile Include="Tag\TagFactory.vb" />
+    <Compile Include="Tag\VideoTag.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -171,6 +176,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PowerTag.dll-Help.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

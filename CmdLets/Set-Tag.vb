@@ -2,22 +2,22 @@
 <Cmdlet(VerbsCommon.Set, TagNounes.Tag, _
         SupportsShouldProcess:=True, DefaultParameterSetName:=Set_Tag.DefaultParameterSetName)> _
 Public Class Set_Tag : Inherits EditTagCmdLetBase
-    Protected Overrides Function ProcessEditTag(ByVal TargetFile As TagLib.File) As Boolean
+    Protected Overrides Function ProcessEditTag(ByVal TargetTag As Tag) As Boolean
         Dim back As Boolean
         Try
-            SetRegexParameter(TargetFile)
-            SetTaglibProperties(TargetFile)
+            SetRegexParameter(TargetTag)
+            SetTaglibProperties(TargetTag)
             back = True
         Catch ex As ArgumentException
             back = False
-            Me.WriteError(New ErrorRecord(ex, "Set-Tag", ErrorCategory.InvalidData, TargetFile))
+            Me.WriteError(New ErrorRecord(ex, "Set-Tag", ErrorCategory.InvalidData, TargetTag))
         End Try
         Return back
     End Function
 
-    Private Sub SetRegexParameter(ByVal TargetFile As TagLib.File)
+    Private Sub SetRegexParameter(ByVal TargetTag As Tag)
         Dim myType = Me.GetType
-        For Each regexParam In GetRegexParameter(TargetFile)
+        For Each regexParam In GetRegexParameter(TargetTag)
             Dim name = regexParam.Key
             Dim stringValue = regexParam.Value
             Dim prop = myType.GetProperty(name)
@@ -42,9 +42,9 @@ Public Class Set_Tag : Inherits EditTagCmdLetBase
         Next
     End Sub
 
-    Private Sub SetTaglibProperties(ByVal TargetFile As TagLib.File)
-        Dim tag = TargetFile.Tag
-        Dim tagType = tag.GetType
+    Private Sub SetTaglibProperties(ByVal TargetTag As Tag)
+
+        Dim tagType = TargetTag.BaseTag.GetType
 
         For Each kvp In Me.GetTaglibParameterProperties
             Dim myProp = kvp.Key
@@ -52,11 +52,11 @@ Public Class Set_Tag : Inherits EditTagCmdLetBase
             Dim value = myProp.GetValue(Me, Nothing)
             If Not value Is Nothing Then
                 Dim taglibPropertyName As String = kvp.Value.TaglibName
-                Dim taglibProp = TagType.GetProperty(taglibPropertyName)
-                If taglibProp Is Nothing Then Throw New InternalException("parameter: '{0}': matching property '{1}' not found in '{2}'", myProp.Name, taglibPropertyName, TagType.FullName)
+                Dim taglibProp = tagType.GetProperty(taglibPropertyName)
+                If taglibProp Is Nothing Then Throw New InternalException("parameter: '{0}': matching property '{1}' not found in '{2}'", myProp.Name, taglibPropertyName, tagType.FullName)
                 Try
                     Me.WriteVerbose("Set tag property '{0}': '{1}'", taglibPropertyName, value)
-                    taglibProp.SetValue(tag, value, Nothing)
+                    taglibProp.SetValue(TargetTag.BaseTag, value, Nothing)
                 Catch ex As Exception
                     Throw New InternalException(String.Format("error setting taglib property '{0}' to value '{1}'", taglibPropertyName, value), ex)
                 End Try
@@ -66,9 +66,9 @@ Public Class Set_Tag : Inherits EditTagCmdLetBase
         Next
     End Sub
 
-    Private Function GetRegexParameter(ByVal TargetFile As TagLib.File) As Dictionary(Of String, String)
+    Private Function GetRegexParameter(ByVal TargetTag As Tag) As Dictionary(Of String, String)
         Dim back = New Dictionary(Of String, String)
-        Dim filename = System.IO.Path.GetFullPath(TargetFile.Name)
+        Dim filename = System.IO.Path.GetFullPath(TargetTag.Path)
         Dim properties = GetTaglibParameterProperties()
 
         For Each currentPair In New KeyValuePair(Of Regex, String)() { _

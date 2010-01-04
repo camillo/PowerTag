@@ -6,32 +6,30 @@
 
     Protected Overrides Sub DoProcessRecord()
         Try
-            Dim targetFile = GetTargetFile()
-            Dim filename = targetFile.Name
-            ProcessTag(targetFile)
+            Dim targetTag = GetTargetTag()
+            Dim filename = targetTag.Path
+            ProcessTag(targetTag)
         Catch ex As System.IO.FileNotFoundException
             Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.ObjectNotFound, FileName))
-        Catch ex As FileCache.MediaFileNotFoundException
-            Throw New InternalException("requestet file for given tag not found", ex)
         Catch ex As TagLibException
             Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.InvalidResult, FileName))
         Catch ex As TagLib.UnsupportedFormatException
-            Me.WriteWarning(String.Format("unsupported Format: '{0}", FileName))
+            Me.WriteVerbose(String.Format("unsupported Format: '{0}", FileName))
         Catch ex As TagLib.CorruptFileException
             Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.InvalidData, FileName))
         End Try
     End Sub
 
-    Protected Overridable Sub ProcessTag(ByVal TargetFile As TagLib.File)
+    Protected Overridable Sub ProcessTag(ByVal TargetFile As Tag)
     End Sub
 
-    Private Function GetTargetFile() As TagLib.File
-        Dim back As TagLib.File
+    Private Function GetTargetTag() As Tag
+        Dim back As Tag
         Select Case Me.ParameterSetName
             Case TagParaneterSetName
-                back = FileCache.GetFile(Me.Tag)
+                back = Me.Tag
             Case DefaultParameterSetName
-                back = FileCache.GetFile(Me.FileName)
+                back = Tag.Create(Me.FileName)
             Case Else
                 Throw New InternalException(String.Format("unknown Parametersetname {0}", Me.ParameterSetName))
         End Select
@@ -51,13 +49,13 @@
         End Set
     End Property
 
-    Private myTag As TagLib.Tag
+    Private myTag As Tag
     <Parameter(Mandatory:=True, ParameterSetName:=TagParaneterSetName, ValueFromPipeline:=True, HelpMessage:=HelpMessageTag)> _
-    Public Property Tag() As TagLib.Tag
+    Public Property Tag() As Tag
         Get
             Return myTag
         End Get
-        Set(ByVal value As TagLib.Tag)
+        Set(ByVal value As Tag)
             myTag = value
         End Set
     End Property

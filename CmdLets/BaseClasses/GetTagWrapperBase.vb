@@ -10,8 +10,8 @@
         Me.myWrappedPropertyName = WrappedPropertyName
     End Sub
 
-    Protected Overrides Sub ProcessTag(ByVal TargetFile As TagLib.File)
-        Dim command = String.Format("Get-Tag -Filename ""{0}"" ", TargetFile.Name.Replace("""", """"""))
+    Protected Overrides Sub ProcessTag(ByVal TargetTag As Tag)
+        Dim command = String.Format("Get-Tag -Filename ""{0}"" ", TargetTag.Path.Replace("""", """"""))
         Dim pipe = Runspaces.Runspace.DefaultRunspace.CreateNestedPipeline(command, False)
         Dim pipeResult = pipe.Invoke()
         For Each result In pipeResult

@@ -1,11 +1,7 @@
 ﻿<Cmdlet(TagVerbs.Reset, TagNounes.Tag)> _
 Public Class Reset_Tag : Inherits EditTagCmdLetBase
-    Protected Overrides Function ProcessEditTag(ByVal TargetFile As TagLib.File) As Boolean
-        Dim filename = TargetFile.Name
-        If FileCache.Contains(filename) Then
-            Me.WriteVerbose("delete '{0}' from cache", filename)
-            FileCache.Remove(filename)
-        End If
+    Protected Overrides Function ProcessEditTag(ByVal TargetTag As Tag) As Boolean
+        TargetTag.Reset()
         Return False
     End Function
 End Class

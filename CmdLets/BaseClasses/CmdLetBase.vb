@@ -2,7 +2,11 @@
     Protected Const FilePrefix As String = "?:file"
 
     Protected Overrides Sub ProcessRecord()
+        Dim enterVerboseHandler = Tag.VerboseHandler
+        Dim enterWarningHanlder = Tag.WarningHandler
         Try
+            Tag.VerboseHandler = AddressOf WriteVerbose
+            Tag.WarningHandler = AddressOf WriteWarning
             DoProcessRecord()
         Catch ex As ArgumentException
             Me.WriteError(New ErrorRecord(ex, "Argument", ErrorCategory.InvalidArgument, TargetObject))
@@ -14,6 +18,9 @@
         Catch ex As Exception
             Dim newEx = New InternalException("unknown exeption in PowerTag. Please report this bug", ex)
             Me.ThrowTerminatingError(New ErrorRecord(newEx, Me.GetType.Name, ErrorCategory.NotSpecified, Me.TargetObject))
+        Finally
+            Tag.VerboseHandler = enterVerboseHandler
+            Tag.WarningHandler = enterWarningHanlder
         End Try
     End Sub
 
@@ -43,12 +50,12 @@
         End If
     End Sub
 
-    Protected Overloads Sub WriteVerbose(ByVal Message As String, ByVal ParamArray Args() As Object)
-        Me.WriteVerbose(String.Format(Message, Args))
+    Public Overloads Sub WriteVerbose(ByVal Message As String, ByVal arg0 As String, ByVal ParamArray Args() As Object)
+        Me.WriteVerbose(String.Format(Message, arg0, Args))
     End Sub
 
-    Protected Overloads Sub WriteWarning(ByVal Message As String, ByVal ParamArray Args() As Object)
-        Me.WriteWarning(String.Format(Message, Args))
+    Protected Overloads Sub WriteWarning(ByVal Message As String, ByVal arg0 As String, ByVal ParamArray Args() As Object)
+        Me.WriteWarning(String.Format(Message, arg0, Args))
     End Sub
 
     Private myTargetObject As Object = "-"
@@ -61,4 +68,9 @@
         End Set
     End Property
 
+    Public ReadOnly Property SessionPath() As String
+        Get
+            Return Me.SessionState.Path.CurrentLocation.Path
+        End Get
+    End Property
 End Class

@@ -1,18 +1,17 @@
 ﻿Public MustInherit Class EditTagCmdLetBase : Inherits TagCmdLetBase
 
-    Protected Overrides Sub ProcessTag(ByVal targetFile As TagLib.File)
-        Dim needSave = ProcessEditTag(targetFile)
+    Protected Overrides Sub ProcessTag(ByVal TargetTag As Tag)
+        Dim needSave = ProcessEditTag(TargetTag)
 
         If needSave _
           AndAlso (Not WhatIfMode = WhatIfModes.true) _
-          AndAlso (WhatIfMode = WhatIfModes.false OrElse ShouldProcess(targetFile.Name)) Then
-            Me.WriteVerbose("saving '{0}'", targetFile.Name)
-            targetFile.Save()
+          AndAlso (WhatIfMode = WhatIfModes.false OrElse ShouldProcess(TargetTag.Path)) Then
+            TargetTag.Save()
         End If
 
         If Me.PassThru.IsPresent Then
-            targetFile = FileCache.GetFile(filename)
-            Me.WriteObject(targetFile.Tag)
+            targetTag = PowerTag.Tag.Create(FileName)
+            Me.WriteObject(targetTag)
         End If
     End Sub
 
@@ -20,7 +19,7 @@
     ''' <summary>is overriden by children to perform the edit task </summary>
     ''' <param name="TargetFile">file, that's tag will be edited</param>
     ''' <returns>true, if cmdlet should save TargetFile; false otherwise</returns>
-    Protected Overridable Function ProcessEditTag(ByVal TargetFile As TagLib.File) As Boolean
+    Protected Overridable Function ProcessEditTag(ByVal TargetFile As Tag) As Boolean
         Return True
     End Function
 

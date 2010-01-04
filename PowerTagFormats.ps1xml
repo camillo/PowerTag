@@ -2,16 +2,14 @@
 <Configuration>
   <ViewDefinitions>
     <View>
-      <Name>TagLib.Tag</Name>
+      <Name>AudioTag</Name>
       <ViewSelectedBy>
-        <TypeName>TagLib.Tag</TypeName>
+        <TypeName>PowerTag.AudioTag</TypeName>
       </ViewSelectedBy>
-      <GroupBy>
-        <PropertyName>Album</PropertyName>
-      </GroupBy>
       <TableControl>
         <AutoSize/>
         <TableHeaders>
+          <TableColumnHeader></TableColumnHeader>
           <TableColumnHeader></TableColumnHeader>
           <TableColumnHeader></TableColumnHeader>
           <TableColumnHeader></TableColumnHeader>
@@ -20,13 +18,16 @@
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
-                <PropertyName>Track</PropertyName>
+                <PropertyName>Title</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Artists</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Title</PropertyName>
+                <PropertyName>Album</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Filename</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

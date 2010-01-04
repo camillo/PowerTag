@@ -1,4 +1,5 @@
-﻿Public Class TagNounes
+﻿<Assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("", "BC40000")> 
+Public Class TagNounes
     Public Const Tag As String = "Tag"
     Public Const TagCache As String = "TagCache"
     Public Const Title As String = "Title"
@@ -8,6 +9,7 @@
     Public Const Year As String = "Year"
     Public Const Genres As String = "Genres"
     Public Const GenreList As String = "GenreList"
+    Public Const MediaFile As String = "MediaFile"
     Private Sub New()
     End Sub
 End Class
