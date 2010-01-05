@@ -1,55 +1,68 @@
 ﻿Public MustInherit Class SetTagWrapperBase : Inherits EditTagCmdLetBase
-    Private myWrappedPropertyName As String
-    Protected Sub New()
-        Dim attr = Me.GetType.GetCustomAttributes(GetType(CmdletAttribute), True)
-        If attr.Length = 0 Then Throw New InternalException("no CmdletAttribute found")
-        Me.myWrappedPropertyName = DirectCast(attr(0), CmdletAttribute).NounName
-    End Sub
+    Protected Const CommandTemplate As String = "Set-Tag -FullName ""{0}"" -{1} $input"
+    Protected Const VirtualParameter As String = " -Virtual"
 
-    Protected Sub New(ByVal WrappedPropertyName As String)
-        Me.myWrappedPropertyName = WrappedPropertyName
-    End Sub
+    Protected Const PropertyNotFoundMessage As String = "No property found for parameter '{0}'."
+    Protected Const UintParseErrorMessage As String = "Cannot parse value '{0}' into UInt32."
+    Protected Const UnknownParameterErrorMessage As String = "Unknown parameter type '{0}'."
 
-    Protected Overrides Function ProcessEditTag(ByVal TargetTag As Tag) As Boolean
-        Dim input As IEnumerable
-        Dim tmp As KeyValuePair(Of Reflection.PropertyInfo, TaglibParameterAttribute) = Nothing
-        If Not Set_Tag.TryGetTaglibParemeter(myWrappedPropertyName, tmp) Then _
-            Throw New InternalException("no property found for parameter '{0}'", myWrappedPropertyName)
-        Dim targetType = tmp.Key.PropertyType
-        Dim value = Me.Value
-        If targetType.Equals(GetType(String)) Then
-            input = New Object() {value}
-        ElseIf targetType.Equals(GetType(String())) Then
-            If TypeOf value Is String() Then
-                input = New Object() {value}
-            ElseIf TypeOf value Is IEnumerable(Of String) Then
-                input = New Object() {value}
-            ElseIf TypeOf value Is Array Then
-                Dim inputList = New List(Of String)
-                For Each inp In DirectCast(value, Array)
-                    inputList.Add(inp.ToString)
-                Next
-                input = inputList.ToArray
-            Else
-                input = New String() {value.ToString}
-            End If
-        ElseIf targetType.Equals(GetType(Nullable(Of UInt32))) Then
-            Dim uIntResult As UInt32
-            If Not UInt32.TryParse(value.ToString, uIntResult) Then _
-                Throw New ArgumentException(String.Format("Cannot parse value '{0}' into UInt32", value), myWrappedPropertyName)
-            input = New Object() {uIntResult}
-        Else
-            Throw New InternalException("unknown parameter type '{0}'", targetType.FullName)
-        End If
-        Dim command = String.Format("Set-Tag -Fullname ""{0}"" -{1} $input", TargetTag.Path.Replace("""", """"""), myWrappedPropertyName)
-        Me.WriteVerbose("executing '{0}'", command)
-        Dim pipe = Runspaces.Runspace.DefaultRunspace.CreateNestedPipeline(command, False)
-        Dim pipeResult = pipe.Invoke(input)
-        Return True
+#Region "process record"
+    Protected Overrides Sub ProcessEditTag(ByVal TargetTag As Tag)
+
+        Dim commandKvp = CreateCommandKvp(TargetTag)
+        Dim pipeResult = ExecuteNewPipeline(commandKvp)
+
+    End Sub
+#End Region
+
+#Region "private helper"
+    Private Function CreateCommandKvp(ByVal TargetTag As Tag) As KeyValuePair(Of String, IEnumerable)
+        Dim back As KeyValuePair(Of String, IEnumerable)
+        Dim wrappedPropertyName = Me.Noun
+
+        Dim taglibKvp As KeyValuePair(Of Reflection.PropertyInfo, TaglibParameterAttribute) = Nothing
+        If Not Set_Tag.TryGetTaglibParemeter(wrappedPropertyName, taglibKvp) Then _
+            Throw New InternalException(PropertyNotFoundMessage, wrappedPropertyName)
+
+        Dim input As IEnumerable = CreateInputObject(taglibKvp.Key.PropertyType, wrappedPropertyName)
+
+        Dim FullnameParameterText = Util.ConvertToParameterText(TargetTag.Path)
+        Dim command = String.Format(CommandTemplate, FullnameParameterText, wrappedPropertyName)
+        If Me.Virtual.IsPresent Then command = String.Concat(command, VirtualParameter)
+
+        back = New KeyValuePair(Of String, IEnumerable)(command, input)
+        Return back
     End Function
 
+    Private Function CreateInputObject(ByVal TargetType As Type, ByVal WrappedPropertyName As String) As IEnumerable
+        Dim back As IEnumerable
+        If TargetType.Equals(GetType(String)) Then
+            back = New Object() {Value}
+        ElseIf TargetType.Equals(GetType(String())) Then
+            If TypeOf Value Is String() Then
+                back = New Object() {Value}
+            ElseIf TypeOf Value Is IEnumerable(Of String) Then
+                back = New Object() {Value}
+            ElseIf TypeOf Value Is Array Then
+                back = Util.ConvertToStringEnumerable(DirectCast(Value, Array))
+            Else
+                back = New String() {Value.ToString}
+            End If
+        ElseIf TargetType.Equals(GetType(Nullable(Of UInt32))) Then
+            Dim uIntResult As UInt32
+            If Not UInt32.TryParse(Value.ToString, uIntResult) Then _
+                Throw New ArgumentException(String.Format(UintParseErrorMessage, Value), WrappedPropertyName)
+            back = New Object() {uIntResult}
+        Else
+            Throw New InternalException(UnknownParameterErrorMessage, TargetType.FullName)
+        End If
+        Return back
+    End Function
+#End Region
+
+#Region "parameter"
     Private myValue As Object
-    <Parameter(Position:=0)> _
+    <Parameter()> _
     Public Property Value() As Object
         Get
             Return myValue
@@ -58,5 +71,6 @@
             myValue = value
         End Set
     End Property
+#End Region
 
 End Class

@@ -1,6 +1,7 @@
 ﻿<Cmdlet(VerbsCommon.Get, TagNounes.TagCache)> _
 Public Class Get_TagCache : Inherits CmdLetBase
 
+#Region "process record"
     Protected Overrides Sub DoProcessRecord()
         Dim showOnlyDirty = Me.Dirty.IsPresent
         For Each currentTag In Tag.GetCachedTags
@@ -9,7 +10,9 @@ Public Class Get_TagCache : Inherits CmdLetBase
             End If
         Next
     End Sub
+#End Region
 
+#Region "parameter"
     Private myDirty As SwitchParameter
     <Parameter()> _
     Public Property Dirty() As SwitchParameter
@@ -20,5 +23,6 @@ Public Class Get_TagCache : Inherits CmdLetBase
             myDirty = value
         End Set
     End Property
+#End Region
 
 End Class

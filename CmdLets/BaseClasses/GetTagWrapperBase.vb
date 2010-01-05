@@ -1,46 +1,48 @@
 ﻿Public MustInherit Class GetTagWrapperBase : Inherits TagCmdLetBase
+    Protected Const GetChildrenCommandPattern As String = "Get-ChildItem | {0}"
+    Protected Const CommandPattern As String = "Get-Tag -Fullname ""{0}"" "
 
-    Private myWrappedPropertyName As String
-    Protected Sub New()
-        Dim attr = Me.GetType.GetCustomAttributes(GetType(CmdletAttribute), True)
-        If attr.Length = 0 Then Throw New InternalException("no CmdletAttribute found")
-        Me.myWrappedPropertyName = DirectCast(attr(0), CmdletAttribute).NounName
-    End Sub
+    Protected Const TagLibPropertyNotFoundMessage As String = "cannot find tag property '{0}'"
 
-    Protected Sub New(ByVal WrappedPropertyName As String)
-        Me.myWrappedPropertyName = WrappedPropertyName
-    End Sub
-
-    Protected Overrides Sub ProcessTag(ByVal TargetTag As Tag)
-        Dim command = String.Format("Get-Tag -Path ""{0}"" ", TargetTag.Path.Replace("""", """"""))
-        Dim pipe = Runspaces.Runspace.DefaultRunspace.CreateNestedPipeline(command, False)
-        Dim pipeResult = pipe.Invoke()
-        For Each result In pipeResult
-            Dim baseObject = result.BaseObject
-            If baseObject Is Nothing Then Continue For
-            Dim baseType = baseObject.GetType
-            'If Not baseType.Equals(GetType(TagLib.Tag)) Then Throw New InternalException(String.Concat("unexpected type ", baseObject.GetType.FullName))
-            Dim targetProperty = baseType.GetProperty(myWrappedPropertyName)
-            If targetProperty Is Nothing Then Throw New InternalException("cannot find tag property '{0}'", myWrappedPropertyName)
-            Dim back = targetProperty.GetValue(baseObject, Nothing)
-            Me.WriteObject(back)
-        Next
-    End Sub
-
+#Region "process record"
     Protected Overrides Sub DoProcessRecord()
         Select Case Me.ParameterSetName
             Case NoParameterParameterSetName
-                Dim myCmdLets = Me.GetType.GetCustomAttributes(GetType(CmdletAttribute), False)
-                If myCmdLets.Length = 0 Then Throw New InternalException("unable to get cmdlet attribute.")
-                Dim myCmdLet = DirectCast(myCmdLets(0), CmdletAttribute)
-                Dim command = String.Format("Get-ChildItem | {0}-{1}", myCmdLet.VerbName, myCmdLet.NounName)
-                Me.WriteVerbose("executing '{0}'", command)
-                Dim pipe = Runspaces.Runspace.DefaultRunspace.CreateNestedPipeline(command, False)
-                Dim back = pipe.Invoke()
+                Dim command = String.Format(GetChildrenCommandPattern, Me.Name)
+                Dim back = ExecuteNewPipeline(command, Nothing)
                 Me.WriteObject(back, True)
             Case Else
                 MyBase.DoProcessRecord()
         End Select
-
     End Sub
+
+    Protected Overrides Sub ProcessTag(ByVal TargetTag As Tag)
+        Dim wrappedPropertyName = Me.Noun
+        Dim fullNameParameterText = Util.ConvertToParameterText(TargetTag.Path)
+        Dim command = String.Format(CommandPattern, fullNameParameterText)
+
+        For Each result In ExecuteNewPipeline(command, Nothing)
+            Dim baseObject = result.BaseObject
+            Dim targetProperty = GetTargetProperty(baseObject, wrappedPropertyName)
+            If targetProperty Is Nothing Then Continue For
+
+            Dim back = targetProperty.GetValue(baseObject, Nothing)
+            Me.WriteObject(back)
+        Next
+    End Sub
+#End Region
+
+#Region "private helper"
+    Private Shared Function GetTargetProperty(ByVal BaseObject As Object, ByVal WrappedPropertyName As String) As Reflection.PropertyInfo
+        Dim back As Reflection.PropertyInfo
+        If BaseObject Is Nothing Then
+            back = Nothing
+        Else
+            Dim baseType = BaseObject.GetType
+            back = baseType.GetProperty(WrappedPropertyName)
+            If back Is Nothing Then Throw New InternalException(TagLibPropertyNotFoundMessage, WrappedPropertyName)
+        End If
+        Return back
+    End Function
+#End Region
 End Class

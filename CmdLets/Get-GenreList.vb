@@ -1,22 +1,15 @@
 ﻿<Cmdlet(VerbsCommon.Get, TagNounes.GenreList)> _
 Public Class Get_GenreList : Inherits CmdLetBase
+
+#Region "process record"
     Protected Overrides Sub DoProcessRecord()
         Dim GenreList = GetGenreList()
         FilterGenereList(GenreList)
         Me.WriteObject(GenreList, True)
     End Sub
+#End Region
 
-    Private Sub FilterGenereList(ByVal GenreList As List(Of String))
-        Dim filter = Me.Filter
-        If Not String.IsNullOrEmpty(filter) Then
-            Dim options = WildcardOptions.IgnoreCase Or WildcardOptions.IgnoreCase
-            Dim wildcard = New WildcardPattern(filter, options)
-            For Each item In GenreList.ToArray
-                If Not wildcard.IsMatch(item) Then GenreList.Remove(item)
-            Next
-        End If
-    End Sub
-
+#Region "private helper"
     Private Function GetGenreList() As List(Of String)
         Dim back = New List(Of String)
         If myVideo.IsPresent Then back.AddRange(TagLib.Genres.Video)
@@ -28,8 +21,19 @@ Public Class Get_GenreList : Inherits CmdLetBase
         Return back
     End Function
 
+    Private Sub FilterGenereList(ByVal GenreList As List(Of String))
+        Dim filter = Me.Filter
+        If Not String.IsNullOrEmpty(filter) Then
+            Dim options = WildcardOptions.IgnoreCase Or WildcardOptions.IgnoreCase
+            Dim wildcard = New WildcardPattern(filter, options)
+            For Each item In GenreList.ToArray
+                If Not wildcard.IsMatch(item) Then GenreList.Remove(item)
+            Next
+        End If
+    End Sub
+#End Region
 
-
+#Region "parameter"
     Private myAudio As SwitchParameter
     <Parameter()> _
     Public Property Audio() As SwitchParameter
@@ -62,5 +66,6 @@ Public Class Get_GenreList : Inherits CmdLetBase
             myFilter = value
         End Set
     End Property
+#End Region
 
 End Class

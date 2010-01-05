@@ -1,6 +1,27 @@
 ﻿Public MustInherit Class CmdLetBase : Inherits PSCmdlet
-    Protected Const FilePrefix As String = "?:file"
+    Public Const DefaulExceptionMessage As String = "Unknown exeption in PowerTag. Please report this bug."
+    Protected Const UnsupportedFormatMessage As String = "unsupported Format: '{0}'"
 
+#Region "ctr / init"
+    Public Sub New()
+        Try
+            InitReflectionProperties()
+        Catch ex As Exception
+            Throw New InternalException("error, creating CmdLet", ex)
+        End Try
+    End Sub
+
+    Private Sub InitReflectionProperties()
+        Dim attr = Me.GetType.GetCustomAttributes(GetType(CmdletAttribute), True)
+        If attr.Length = 0 Then Throw New InternalException("no CmdletAttribute found for type '{0}'", Me.GetType.FullName)
+        Dim cmdLetAttribute = DirectCast(attr(0), CmdletAttribute)
+        Me.myVerb = cmdLetAttribute.VerbName
+        Me.myNoun = cmdLetAttribute.NounName
+    End Sub
+
+#End Region
+
+#Region "process record"
     Protected Overrides Sub ProcessRecord()
         Dim enterVerboseHandler = Tag.VerboseHandler
         Dim enterWarningHanlder = Tag.WarningHandler
@@ -9,82 +30,87 @@
             Tag.WarningHandler = AddressOf WriteWarning
             DoProcessRecord()
         Catch ex As ArgumentException
-            Me.WriteError(New ErrorRecord(ex, "Argument", ErrorCategory.InvalidArgument, TargetObject))
+            Me.WriteError(New ErrorRecord(ex, Me.DefaultErrorId, ErrorCategory.InvalidArgument, ex.ParamName))
         Catch ex As PipelineStoppedException
             Me.Host.UI.WriteLine(ex.Message)
         Catch ex As InternalException
-            Me.WriteWarning("Internal error in PowerTag. Please report this bug.")
-            Me.ThrowTerminatingError(New ErrorRecord(ex, Me.GetType.Name, ErrorCategory.InvalidOperation, Me.TargetObject))
+            Me.ThrowTerminatingError(New ErrorRecord(ex, Me.DefaultErrorId, ErrorCategory.InvalidOperation, Me))
         Catch ex As Exception
-            Dim newEx = New InternalException("unknown exeption in PowerTag. Please report this bug", ex)
-            Me.ThrowTerminatingError(New ErrorRecord(newEx, Me.GetType.Name, ErrorCategory.NotSpecified, Me.TargetObject))
+            Dim newEx = New InternalException(DefaulExceptionMessage, ex)
+            Me.ThrowTerminatingError(New ErrorRecord(newEx, Me.DefaultErrorId, ErrorCategory.NotSpecified, Me))
         Finally
             Tag.VerboseHandler = enterVerboseHandler
             Tag.WarningHandler = enterWarningHanlder
         End Try
     End Sub
 
-    Private myUltraVerbose As SwitchParameter
-    <Parameter()> _
-    Public Property UltraVerbose() As SwitchParameter
-        Get
-            Return myUltraVerbose
-        End Get
-        Set(ByVal value As SwitchParameter)
-            myUltraVerbose = value
-        End Set
-    End Property
-
     Protected Overridable Sub DoProcessRecord()
     End Sub
+#End Region
 
-    Protected Overloads Sub WriteUltraVerbose(ByVal Message As String, ByVal ParamArray Args() As Object)
-        If Me.UltraVerbose.IsPresent Then
-            Me.WriteVerbose(String.Format(Message, Args))
-        End If
-    End Sub
-
-    Protected Overloads Sub WriteUltraVerbose(ByVal Message As String)
-        If Me.UltraVerbose.IsPresent Then
-            Me.WriteVerbose(Message)
-        End If
-    End Sub
-
-    Public Overloads Sub WriteVerbose(ByVal Message As String, ByVal arg0 As String, ByVal ParamArray Args() As Object)
-        Me.WriteVerbose(String.Format(Message, arg0, Args))
-    End Sub
-
+#Region "protected helper"
     Protected Overloads Sub WriteWarning(ByVal Message As String, ByVal arg0 As String, ByVal ParamArray Args() As Object)
         Me.WriteWarning(String.Format(Message, arg0, Args))
     End Sub
 
-    Private myTargetObject As Object = "-"
-    Protected Property TargetObject() As Object
+    Protected Overloads Sub WriteVerbose(ByVal Message As String, ByVal arg0 As String, ByVal ParamArray Args() As Object)
+        Me.WriteVerbose(String.Format(Message, arg0, Args))
+    End Sub
+
+    Protected Function ExecuteNewPipeline(ByVal ComandKvp As KeyValuePair(Of String, IEnumerable)) As System.Collections.ObjectModel.Collection(Of PSObject)
+        Return ExecuteNewPipeline(ComandKvp.Key, ComandKvp.Value)
+    End Function
+
+    Protected Function ExecuteNewPipeline(ByVal Command As String, ByVal Input As IEnumerable) As System.Collections.ObjectModel.Collection(Of PSObject)
+        Me.WriteVerbose("executing '{0}'", Command)
+        Dim pipe = Runspaces.Runspace.DefaultRunspace.CreateNestedPipeline(Command, False)
+        Dim pipeResult = pipe.Invoke(Input)
+        Return pipeResult
+    End Function
+
+    Protected ReadOnly Property Name() As String
         Get
-            Return myTargetObject
+            Dim back = String.Format("{0}-{1}", Me.Verb, Me.Noun)
+            Return back
         End Get
-        Set(ByVal value As Object)
-            myTargetObject = value
-        End Set
     End Property
 
-    Public ReadOnly Property SessionPath() As String
+#End Region
+
+#Region "Protected Properties"
+    Protected ReadOnly Property SessionPath() As String
         Get
             Return Me.SessionState.Path.CurrentLocation.Path
         End Get
     End Property
 
-    Protected ReadOnly Property Name() As String
+    Private myVerb As String
+    Protected ReadOnly Property Verb() As String
         Get
-            Dim back As String
-            Dim attrs = Me.GetType.GetCustomAttributes(GetType(CmdletAttribute), True)
-            If attrs.Length = 0 Then
-                back = "unknown"
-            Else
-                Dim atrr = DirectCast(attrs(0), CmdletAttribute)
-                back = String.Format("{0}-{1}", atrr.VerbName, atrr.NounName)
-            End If
-            Return back
+            Return myVerb
         End Get
     End Property
+
+    Private myNoun As String
+    Protected ReadOnly Property Noun() As String
+        Get
+            Return myNoun
+        End Get
+    End Property
+
+    Protected ReadOnly Property DefaultErrorId() As String
+        Get
+            Return Me.GetType.Name
+        End Get
+    End Property
+#End Region
+
+
+
+
+
+
+
+
+
 End Class

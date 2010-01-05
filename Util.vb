@@ -10,6 +10,18 @@
         Return back
     End Function
 
+    Public Shared Function ConvertToStringEnumerable(ByVal Items As Array) As IEnumerable
+        Dim back = New List(Of String)
+        For Each item In Items
+            back.Add(item.ToString)
+        Next
+        Return back.ToArray
+    End Function
+
+    Public Shared Function ConvertToParameterText(ByVal Item As String) As String
+        Return Item.Replace("""", """""")
+    End Function
+
 #If DEBUG Then
     ''' <summary>this is a helperclass to generate code. No need to compile it into relase binaries. </summary>
     Friend Shared Function GenerateWrapper() As String

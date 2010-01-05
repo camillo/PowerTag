@@ -2,26 +2,35 @@
 <Cmdlet(VerbsCommon.Set, TagNounes.Tag, _
         SupportsShouldProcess:=True, DefaultParameterSetName:=Set_Tag.DefaultParameterSetName)> _
 Public Class Set_Tag : Inherits EditTagCmdLetBase
-    Protected Overrides Function ProcessEditTag(ByVal TargetTag As Tag) As Boolean
-        Dim back As Boolean
+    Private Const NoProperryFoundError As String = "no property found for parameter '{0}'"
+    Private Const Uint32ParseError As String = "parameter '{0}': cannot parse value '{1}' into UInt32"
+    Private Const UnknownTypeError As String = "parameter '{0}': unknown type '{1}'"
+    Private Const MultipleDefinitionError As String = "parameter '{0}' has multiple definitions (regex and directy)"
+    Private Const MatchingPropertyNotFoundError As String = "parameter: '{0}': matching property '{1}' not found in '{2}'"
+    Private Const SetValueError As String = "error setting taglib property '{0}' to value '{1}'"
+    Private Const InvalidRegexGroupError As String = "Invalid regex group name '{0}'; no matching parameter found"
+    Private Const MultipleRegexError As String = "Parameter '{0}' is defiened by more than one regex"
+
+    Private Const NoMatchWarning As String = "regex does not match"
+#Region "process record"
+    Protected Overrides Sub ProcessEditTag(ByVal TargetTag As Tag)
         Try
             SetRegexParameter(TargetTag)
             SetTaglibProperties(TargetTag)
-            back = True
         Catch ex As ArgumentException
-            back = False
-            Me.WriteError(New ErrorRecord(ex, "Set-Tag", ErrorCategory.InvalidData, TargetTag))
+            Me.WriteError(New ErrorRecord(ex, Me.DefaultErrorId, ErrorCategory.InvalidData, TargetTag))
         End Try
-        Return back
-    End Function
+    End Sub
+#End Region
 
+#Region "private helper"
     Private Sub SetRegexParameter(ByVal TargetTag As Tag)
         Dim myType = Me.GetType
         For Each regexParam In GetRegexParameter(TargetTag)
             Dim name = regexParam.Key
             Dim stringValue = regexParam.Value
             Dim prop = myType.GetProperty(name)
-            If prop Is Nothing Then Throw New InternalException("no property found for parameter '{0}'", name)
+            If prop Is Nothing Then Throw New InternalException(NoProperryFoundError, name)
             Dim targetValue As Object
             Dim targetType = prop.PropertyType
             If targetType.Equals(GetType(String)) Then
@@ -31,13 +40,13 @@ Public Class Set_Tag : Inherits EditTagCmdLetBase
             ElseIf targetType.Equals(GetType(Nullable(Of UInt32))) Then
                 Dim uint32Value As UInt32
                 If Not UInt32.TryParse(stringValue, uint32Value) Then _
-                    Throw New ArgumentException(String.Format("parameter '{0}': cannot parse value '{1}' into UInt32", name, stringValue), name)
+                    Throw New ArgumentException(String.Format(Uint32ParseError, name, stringValue), name)
                 targetValue = uint32Value
             Else
-                Throw New InternalException("parameter '{0}': unknown type '{1}'", name, targetType.FullName)
+                Throw New InternalException(UnknownTypeError, name, targetType.FullName)
             End If
             Dim oldValue = prop.GetValue(Me, Nothing)
-            If Not oldValue Is Nothing Then Throw New ArgumentException(String.Format("parameter '{0}' has multiple definitions (regex and directy)", name), name)
+            If Not oldValue Is Nothing Then Throw New ArgumentException(String.Format(MultipleDefinitionError, name), name)
             prop.SetValue(Me, targetValue, Nothing)
         Next
     End Sub
@@ -53,16 +62,12 @@ Public Class Set_Tag : Inherits EditTagCmdLetBase
             If Not value Is Nothing Then
                 Dim taglibPropertyName As String = kvp.Value.TaglibName
                 Dim taglibProp = tagType.GetProperty(taglibPropertyName)
-                If taglibProp Is Nothing Then Throw New InternalException("parameter: '{0}': matching property '{1}' not found in '{2}'", myProp.Name, taglibPropertyName, tagType.FullName)
+                If taglibProp Is Nothing Then Throw New InternalException(MatchingPropertyNotFoundError, myProp.Name, taglibPropertyName, tagType.FullName)
                 Try
-                    Me.WriteVerbose("Set tag property '{0}': '{1}'", taglibPropertyName, value)
                     taglibProp.SetValue(TargetTag.BaseTag, value, Nothing)
                 Catch ex As Exception
-                    Throw New InternalException(String.Format("error setting taglib property '{0}' to value '{1}'", taglibPropertyName, value), ex)
+                    Throw New InternalException(String.Format(SetValueError, taglibPropertyName, value), ex)
                 End Try
-            Else
-                'this is only usefull for real internal debuging.
-                'Me.WriteVerbose("paramter '{0}' not set; skipping", myPropName)
             End If
         Next
     End Sub
@@ -80,7 +85,7 @@ Public Class Set_Tag : Inherits EditTagCmdLetBase
             If currentRegex Is Nothing Then Continue For
             Dim match = currentRegex.Match(currentPair.Value)
             If Not match.Success Then
-                Me.WriteWarning("regex does not match")
+                Me.WriteWarning(NoMatchWarning)
                 Continue For
             End If
             For Each groupName In currentRegex.GetGroupNames
@@ -88,12 +93,12 @@ Public Class Set_Tag : Inherits EditTagCmdLetBase
                 Dim tmp As KeyValuePair(Of Reflection.PropertyInfo, TaglibParameterAttribute) = Nothing
 
                 If Not TryGetTaglibParemeter(groupName, tmp) Then Throw New  _
-                ArgumentException(String.Format("Invalid regex group name '{0}'; no matching parameter found", groupName), groupName)
+                ArgumentException(String.Format(InvalidRegexGroupError, groupName), groupName)
 
                 Dim group = match.Groups(groupName)
                 If group.Success Then
                     Dim parameterName = tmp.Key.Name
-                    If back.ContainsKey(parameterName) Then Throw New ArgumentException(String.Format("Parameter '{0}' is defiened by more than one regex", parameterName), groupName)
+                    If back.ContainsKey(parameterName) Then Throw New ArgumentException(String.Format(MultipleRegexError, parameterName), groupName)
                     Dim value = group.Value
                     back.Add(parameterName, value)
                     Me.WriteVerbose("regex value '{0}': '{1}'", groupName, value)
@@ -106,6 +111,26 @@ Public Class Set_Tag : Inherits EditTagCmdLetBase
         Return back
     End Function
 
+    Private Function GetTaglibParameterProperties() As Dictionary(Of Reflection.PropertyInfo, TaglibParameterAttribute)
+        Dim back = New Dictionary(Of Reflection.PropertyInfo, TaglibParameterAttribute)
+        Dim myType = Me.GetType
+        For Each prop In myType.GetProperties
+            If prop.DeclaringType.Equals(myType) Then
+                Dim attributes = prop.GetCustomAttributes(GetType(TaglibParameterAttribute), False)
+                If attributes.Length = 1 Then
+                    back.Add(prop, DirectCast(attributes(0), TaglibParameterAttribute))
+                Else
+                    Me.WriteVerbose("skipping property '{0}' (no parameter)", prop.Name)
+                End If
+            Else
+                Me.WriteVerbose("skipping property '{0}' (not mine)", prop.Name)
+            End If
+        Next
+        Return back
+    End Function
+#End Region
+
+#Region "shared helper"
     Friend Shared Function TryGetTaglibParemeter(ByVal Name As String, ByRef Result As KeyValuePair(Of Reflection.PropertyInfo, TaglibParameterAttribute)) As Boolean
         Dim back As Boolean = False
         Dim foundMore As Boolean = False
@@ -131,24 +156,7 @@ Public Class Set_Tag : Inherits EditTagCmdLetBase
         If foundMore Then Throw New ArgumentException(String.Format("more than one parameter could match name '{0}'", Name), Name)
         Return back
     End Function
-
-    Private Function GetTaglibParameterProperties() As Dictionary(Of Reflection.PropertyInfo, TaglibParameterAttribute)
-        Dim back = New Dictionary(Of Reflection.PropertyInfo, TaglibParameterAttribute)
-        Dim myType = Me.GetType
-        For Each prop In myType.GetProperties
-            If prop.DeclaringType.Equals(myType) Then
-                Dim attributes = prop.GetCustomAttributes(GetType(TaglibParameterAttribute), False)
-                If attributes.Length = 1 Then
-                    back.Add(prop, DirectCast(attributes(0), TaglibParameterAttribute))
-                Else
-                    Me.WriteUltraVerbose("skipping property '{0}' (no parameter)", prop.Name)
-                End If
-            Else
-                Me.WriteUltraVerbose("skipping property '{0}' (not mine)", prop.Name)
-            End If
-        Next
-        Return back
-    End Function
+#End Region
 
 #Region "Taglib Parameter"
     Private myTitle As String
@@ -513,7 +521,6 @@ Public Class Set_Tag : Inherits EditTagCmdLetBase
             myArtists = value
         End Set
     End Property
-
 #End Region
 
 #Region "Regex Parameter"

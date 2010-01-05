@@ -1,5 +1,7 @@
 ﻿<Cmdlet(VerbsCommon.Get, TagNounes.MediaItem)> _
 Public Class Get_MediaItem : Inherits CmdLetBase
+
+#Region "process record"
     Protected Overrides Sub DoProcessRecord()
         Try
             Dim back = New List(Of System.IO.FileInfo)
@@ -19,7 +21,9 @@ Public Class Get_MediaItem : Inherits CmdLetBase
             Me.WriteError(New ErrorRecord(ex, "MediaFile", ErrorCategory.ObjectNotFound, ex.FileName))
         End Try
     End Sub
+#End Region
 
+#Region "private helper"
     Private Sub ScanDirecectory(ByVal Path As String, ByVal Result As List(Of System.IO.FileInfo), ByVal Recursive As Boolean)
         Try
             For Each file In System.IO.Directory.GetFiles(Path)
@@ -34,7 +38,9 @@ Public Class Get_MediaItem : Inherits CmdLetBase
             Me.WriteWarning("cannot scan '{0}'; {1}", Path, ex.Message)
         End Try
     End Sub
+#End Region
 
+#Region "parameter"
     Private myRecursive As SwitchParameter
     <Parameter()> _
     Public Property Recursive() As SwitchParameter
@@ -56,5 +62,6 @@ Public Class Get_MediaItem : Inherits CmdLetBase
             myFullname = value
         End Set
     End Property
+#End Region
 
 End Class

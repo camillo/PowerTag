@@ -3,12 +3,38 @@
 Public Class Get_Tag : Inherits CmdLetBase
     Private Const HelpMessageFileName As String = "path to mediafile (mp3,ogg...)"
 
+    Private Const NoTagMessage As String = "File '{0}' does not have a tag"
+
+#Region "process record"
     Protected Overrides Sub DoProcessRecord()
         Dim TargetFiles = GetFileList()
         If HaveFilter Then HandleFilter(TargetFiles)
         ProcessFiles(TargetFiles)
     End Sub
 
+    Private Sub ProcessFiles(ByVal TargetFiles As List(Of String))
+        For Each currentFileName In TargetFiles
+            Try
+                Dim mediaTag = Tag.Create(currentFileName, Me.SessionPath, Me.Force.IsPresent)
+                If mediaTag Is Nothing Then
+                    Me.WriteWarning(NoTagMessage, currentFileName)
+                Else
+                    Me.WriteObject(mediaTag)
+                End If
+            Catch ex As System.IO.FileNotFoundException
+                Me.WriteError(New ErrorRecord(ex, Me.DefaultErrorId, ErrorCategory.ObjectNotFound, currentFileName))
+            Catch ex As TagLibException
+                Me.WriteError(New ErrorRecord(ex, Me.DefaultErrorId, ErrorCategory.InvalidResult, currentFileName))
+            Catch ex As TagLib.UnsupportedFormatException
+                Me.WriteVerbose(UnsupportedFormatMessage, currentFileName)
+            Catch ex As TagLib.CorruptFileException
+                Me.WriteError(New ErrorRecord(ex, Me.DefaultErrorId, ErrorCategory.InvalidData, currentFileName))
+            End Try
+        Next
+    End Sub
+#End Region
+
+#Region "private helper"
     Private Function GetFileList() As List(Of String)
         Dim back As List(Of String)
         Dim parameterFileName = Me.FullName
@@ -33,29 +59,6 @@ Public Class Get_Tag : Inherits CmdLetBase
         Return back
     End Function
 
-    Private Sub ProcessFiles(ByVal TargetFiles As List(Of String))
-        For Each currentFileName In TargetFiles
-            Me.WriteVerbose("processing file '{0}'", currentFileName)
-            Me.TargetObject = currentFileName
-            Try
-                Dim mediaTag = Tag.Create(currentFileName, Me.SessionPath, Me.Force.IsPresent)
-                If mediaTag Is Nothing Then
-                    Me.WriteWarning(String.Format("File '{0}' does not have a tag", currentFileName))
-                Else
-                    Me.WriteObject(mediaTag)
-                End If
-            Catch ex As System.IO.FileNotFoundException
-                Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.ObjectNotFound, currentFileName))
-            Catch ex As TagLibException
-                Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.InvalidResult, currentFileName))
-            Catch ex As TagLib.UnsupportedFormatException
-                Me.WriteVerbose(String.Format("unsupported Format: '{0}'", currentFileName))
-            Catch ex As TagLib.CorruptFileException
-                Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.InvalidData, currentFileName))
-            End Try
-        Next
-    End Sub
-
     Private Sub HandleFilter(ByVal TargetFiles As List(Of String))
         Dim options = WildcardOptions.Compiled Or WildcardOptions.IgnoreCase
         For Each file In TargetFiles.ToArray
@@ -70,7 +73,7 @@ Public Class Get_Tag : Inherits CmdLetBase
                     If compareString Is Nothing Then compareString = String.Empty
                     If Not pattern.IsMatch(compareString) Then
                         cankeep = False
-                        WriteUltraVerbose("Title filter: remove file '{0}'", file)
+                        WriteVerbose("Title filter: remove file '{0}'", file)
                     End If
                 End If
 
@@ -89,7 +92,7 @@ Public Class Get_Tag : Inherits CmdLetBase
                     Next
                     If Not keep Then
                         cankeep = False
-                        WriteUltraVerbose("Artist filter: remove file '{0}'", file)
+                        WriteVerbose("Artist filter: remove file '{0}'", file)
                     End If
                 End If
 
@@ -100,7 +103,7 @@ Public Class Get_Tag : Inherits CmdLetBase
                     If compareString Is Nothing Then compareString = String.Empty
                     If Not pattern.IsMatch(compareString) Then
                         cankeep = False
-                        WriteUltraVerbose("Album filter: remove file '{0}'", file)
+                        WriteVerbose("Album filter: remove file '{0}'", file)
                     End If
                 End If
 
@@ -131,7 +134,19 @@ Public Class Get_Tag : Inherits CmdLetBase
             Me.WriteWarning("error, scanning directory: '{0}' - {1}", Directory, ex.Message)
         End Try
     End Sub
+#End Region
 
+#Region "private properties"
+    Private ReadOnly Property HaveFilter() As Boolean
+        Get
+            Return Not (String.IsNullOrEmpty(Me.Title) _
+                        AndAlso String.IsNullOrEmpty(Artist) _
+                        AndAlso String.IsNullOrEmpty(Album))
+        End Get
+    End Property
+#End Region
+
+#Region "parameter"
     Private myRecursive As SwitchParameter
     <Parameter()> _
     Public Property Recursive() As SwitchParameter
@@ -163,14 +178,6 @@ Public Class Get_Tag : Inherits CmdLetBase
         Set(ByVal value As String)
             myTitle = value
         End Set
-    End Property
-
-    Private ReadOnly Property HaveFilter() As Boolean
-        Get
-            Return Not (String.IsNullOrEmpty(Me.Title) _
-                        AndAlso String.IsNullOrEmpty(Artist) _
-                        AndAlso String.IsNullOrEmpty(Album))
-        End Get
     End Property
 
     Private myArtist As String
@@ -205,5 +212,6 @@ Public Class Get_Tag : Inherits CmdLetBase
             myForce = value
         End Set
     End Property
+#End Region
 
 End Class

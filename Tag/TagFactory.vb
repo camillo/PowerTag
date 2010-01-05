@@ -27,6 +27,19 @@
         Return back
     End Function
 
+    Friend Shared Function ExchangeIfNeeded(ByVal Item As Tag) As Tag
+        Dim back As Tag = Nothing
+        Dim FullName = Item.FullName
+        SyncLock Cache
+            If Not Cache.TryGetValue(FullName, back) Then
+                back = DoCreate(FullName)
+                Cache.Add(FullName, back)
+            End If
+        End SyncLock
+        If Not back Is Item Then WriteVerbose("Tagobject changed; return new object")
+        Return back
+    End Function
+
     Private Shared Function DoCreate(ByVal Fullname As String) As Tag
         Dim back As Tag
         Dim file = TagLib.File.Create(Fullname)
@@ -67,6 +80,7 @@
     End Sub
 
     Friend Shared Function GetCachedTags() As IEnumerable(Of Tag)
-        Return Cache.Values
+        Dim back = New List(Of Tag)(Cache.Values)
+        Return back
     End Function
 End Class

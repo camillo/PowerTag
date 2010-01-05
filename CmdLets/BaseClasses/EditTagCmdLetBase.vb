@@ -1,38 +1,24 @@
 ﻿Public MustInherit Class EditTagCmdLetBase : Inherits TagCmdLetBase
+    Public Const WhatIfMessagePattern As String = "perfom {0} on {1}"
 
+#Region "process record"
     Protected Overrides Sub ProcessTag(ByVal TargetTag As Tag)
-        Dim msg = String.Format("perfom {0} on {1}", Me.Name, TargetTag)
-        If ShouldProcess(msg, msg, msg) Then
-            Dim needSave = ProcessEditTag(TargetTag)
+        Dim msg = String.Format(WhatIfMessagePattern, Me.Name, TargetTag)
 
-            If Me.Virtual.IsPresent Then
-                Me.WriteVerbose("virtual mode; do not save tag to disk.")
-                TargetTag.MarkDirty()
-            Else
-                If needSave Then
-                    TargetTag.Save()
-                Else
-                    TargetTag.MarkDirty()
-                End If
-            End If
+        If ShouldProcess(msg, msg, msg) Then
+            ProcessEditTag(TargetTag)
+            Save(TargetTag)
         End If
 
         If Me.PassThru.IsPresent Then Me.WriteObject(TargetTag)
     End Sub
 
     ''' <summary>is overriden by children to perform the edit task </summary>
-    ''' <param name="TargetFile">file, that's tag will be edited</param>
-    ''' <returns>true, if cmdlet should save TargetFile; false otherwise</returns>
-    Protected Overridable Function ProcessEditTag(ByVal TargetFile As Tag) As Boolean
-        Return True
-    End Function
+    Protected Overridable Sub ProcessEditTag(ByVal TargetTag As Tag)
+    End Sub
+#End Region
 
-    Protected Enum WhatIfModes
-        none = 0
-        [true]
-        [false]
-    End Enum
-
+#Region "Properties"
     Private myPassThru As SwitchParameter
     <Parameter()> _
     Public Property PassThru() As SwitchParameter
@@ -54,5 +40,15 @@
             myVirtual = value
         End Set
     End Property
+#End Region
 
+#Region "private helper"
+    Private Sub Save(ByVal TargetTag As Tag)
+        If Me.Virtual.IsPresent Then
+            TargetTag.MarkDirty()
+        Else
+            TargetTag.Save()
+        End If
+    End Sub
+#End Region
 End Class

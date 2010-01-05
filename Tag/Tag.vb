@@ -58,7 +58,7 @@
 #Region "Wrapped Taglib Properties"
     Public ReadOnly Property FullName() As String
         Get
-            Return Me.Path
+            Return myFile.Name
         End Get
     End Property
 
