@@ -18,7 +18,7 @@
     End Sub
 #End Region
 
-#Region "Properties"
+#Region "parameter"
     Private myPassThru As SwitchParameter
     <Parameter()> _
     Public Property PassThru() As SwitchParameter
