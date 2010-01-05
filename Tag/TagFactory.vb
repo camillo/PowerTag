@@ -2,13 +2,14 @@
     Private Shared Cache As New TagCache
     Private Shared SupportedExtensions As New List(Of String)(TagLib.SupportedMimeType.AllExtensions)
 
-    Friend Shared Function Create(ByVal Filename As String) As Tag
-        Return Create(Filename, False)
+    Friend Shared Function Create(ByVal Filename As String, ByVal SessionPath As String) As Tag
+        Return Create(Filename, SessionPath, False)
     End Function
 
-    Friend Shared Function Create(ByVal Filename As String, ByVal Force As Boolean) As Tag
+    Friend Shared Function Create(ByVal Filename As String, ByVal SessionPath As String, ByVal Force As Boolean) As Tag
         Dim back As Tag = Nothing
-        Dim Fullname = System.IO.Path.GetFullPath(Filename)
+        Dim Fullname = Util.GetFullPath(Filename, SessionPath)
+
         If Force Then
             WriteVerbose("force read on disk; ignore cache; not updating cache")
             back = DoCreate(Fullname)
@@ -17,9 +18,9 @@
                 If Not Cache.TryGetValue(Fullname, back) Then
                     WriteVerbose("cache miss")
                     back = DoCreate(Fullname)
-                    Cache.Add(Filename, back)
+                    Cache.Add(Fullname, back)
                 Else
-                    WriteVerbose("cache hit", Fullname)
+                    WriteVerbose("cache hit")
                 End If
             End SyncLock
         End If
@@ -64,4 +65,8 @@
             Cache.Clear()
         End SyncLock
     End Sub
+
+    Friend Shared Function GetCachedTags() As IEnumerable(Of Tag)
+        Return Cache.Values
+    End Function
 End Class

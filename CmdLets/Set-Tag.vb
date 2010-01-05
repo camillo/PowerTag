@@ -31,7 +31,7 @@ Public Class Set_Tag : Inherits EditTagCmdLetBase
             ElseIf targetType.Equals(GetType(Nullable(Of UInt32))) Then
                 Dim uint32Value As UInt32
                 If Not UInt32.TryParse(stringValue, uint32Value) Then _
-                Throw New ArgumentException(String.Format("parameter '{0}': cannot parse value '{1}' into UInt32", name, stringValue), name)
+                    Throw New ArgumentException(String.Format("parameter '{0}': cannot parse value '{1}' into UInt32", name, stringValue), name)
                 targetValue = uint32Value
             Else
                 Throw New InternalException("parameter '{0}': unknown type '{1}'", name, targetType.FullName)
@@ -61,7 +61,8 @@ Public Class Set_Tag : Inherits EditTagCmdLetBase
                     Throw New InternalException(String.Format("error setting taglib property '{0}' to value '{1}'", taglibPropertyName, value), ex)
                 End Try
             Else
-                Me.WriteUltraVerbose("paramter '{0}' not set; skipping", myPropName)
+                'this is only usefull for real internal debuging.
+                'Me.WriteVerbose("paramter '{0}' not set; skipping", myPropName)
             End If
         Next
     End Sub

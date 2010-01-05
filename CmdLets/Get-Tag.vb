@@ -2,7 +2,6 @@
         SupportsShouldProcess:=False)> _
 Public Class Get_Tag : Inherits CmdLetBase
     Private Const HelpMessageFileName As String = "path to mediafile (mp3,ogg...)"
-    Private myFileName As String
 
     Protected Overrides Sub DoProcessRecord()
         Dim TargetFiles = GetFileList()
@@ -12,7 +11,7 @@ Public Class Get_Tag : Inherits CmdLetBase
 
     Private Function GetFileList() As List(Of String)
         Dim back As List(Of String)
-        Dim parameterFileName = Me.FileName
+        Dim parameterFileName = Me.FullName
         If String.IsNullOrEmpty(parameterFileName) Then
             Dim sessionPath = Me.SessionPath
             Me.WriteVerbose("No filename given. Use files in '{0}'", sessionPath)
@@ -20,17 +19,12 @@ Public Class Get_Tag : Inherits CmdLetBase
             FillFileList(sessionPath, FileList, Me.Recursive.IsPresent)
             back = FileList
         Else
-            Dim fullPath As String
-            If System.IO.Path.IsPathRooted(parameterFileName) Then
-                fullPath = parameterFileName
-            Else
-                fullPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Me.SessionPath, parameterFileName))
-            End If
+            Dim fullPath As String = Util.GetFullPath(parameterFileName, Me.SessionPath)
             If System.IO.Directory.Exists(fullPath) Then
                 Dim FileList = New List(Of String)
                 FillFileList(fullPath, FileList, Me.Recursive.IsPresent)
                 back = FileList
-            ElseIf System.IO.File.Exists(parameterFileName) Then
+            ElseIf System.IO.File.Exists(fullPath) Then
                 back = New List(Of String)(New String() {fullPath})
             Else
                 Throw New ArgumentException("Filename does not match a directory or file", "Filename")
@@ -44,7 +38,7 @@ Public Class Get_Tag : Inherits CmdLetBase
             Me.WriteVerbose("processing file '{0}'", currentFileName)
             Me.TargetObject = currentFileName
             Try
-                Dim mediaTag = Tag.Create(currentFileName, Me.Force.IsPresent)
+                Dim mediaTag = Tag.Create(currentFileName, Me.SessionPath, Me.Force.IsPresent)
                 If mediaTag Is Nothing Then
                     Me.WriteWarning(String.Format("File '{0}' does not have a tag", currentFileName))
                 Else
@@ -62,13 +56,12 @@ Public Class Get_Tag : Inherits CmdLetBase
         Next
     End Sub
 
-
     Private Sub HandleFilter(ByVal TargetFiles As List(Of String))
         Dim options = WildcardOptions.Compiled Or WildcardOptions.IgnoreCase
         For Each file In TargetFiles.ToArray
             Dim cankeep As Boolean = True
             Try
-                Dim tag = PowerTag.Tag.Create(file)
+                Dim tag = PowerTag.Tag.Create(file, Me.SessionPath)
 
                 ' Handle Title filter
                 If Not String.IsNullOrEmpty(Title) Then
@@ -150,13 +143,14 @@ Public Class Get_Tag : Inherits CmdLetBase
         End Set
     End Property
 
-    <Parameter(Position:=0, Mandatory:=False, ValueFromPipeline:=True, HelpMessage:=HelpMessageFileName)> _
-    Public Property FileName() As String
+    Private myFullName As String
+    <Parameter(Position:=0, Mandatory:=False, ValueFromPipeline:=True, ValueFromPipelineByPropertyName:=True, HelpMessage:=HelpMessageFileName)> _
+    Public Property FullName() As String
         Get
-            Return myFileName
+            Return myFullName
         End Get
         Set(ByVal value As String)
-            myFileName = value
+            myFullName = value
         End Set
     End Property
 

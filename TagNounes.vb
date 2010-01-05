@@ -9,7 +9,7 @@ Public Class TagNounes
     Public Const Year As String = "Year"
     Public Const Genres As String = "Genres"
     Public Const GenreList As String = "GenreList"
-    Public Const MediaFile As String = "MediaFile"
+    Public Const MediaItem As String = "MediaItem"
     Private Sub New()
     End Sub
 End Class

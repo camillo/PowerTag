@@ -11,7 +11,6 @@
     End Sub
 
     Protected Overrides Function ProcessEditTag(ByVal TargetTag As Tag) As Boolean
-
         Dim input As IEnumerable
         Dim tmp As KeyValuePair(Of Reflection.PropertyInfo, TaglibParameterAttribute) = Nothing
         If Not Set_Tag.TryGetTaglibParemeter(myWrappedPropertyName, tmp) Then _
@@ -26,23 +25,24 @@
             ElseIf TypeOf value Is IEnumerable(Of String) Then
                 input = New Object() {value}
             ElseIf TypeOf value Is Array Then
-                input = New Object() {value}
+                Dim inputList = New List(Of String)
+                For Each inp In DirectCast(value, Array)
+                    inputList.Add(inp.ToString)
+                Next
+                input = inputList.ToArray
             Else
-                input = New Object() {value.ToString}
+                input = New String() {value.ToString}
             End If
         ElseIf targetType.Equals(GetType(Nullable(Of UInt32))) Then
             Dim uIntResult As UInt32
-            If Not UInt32.TryParse(value.ToString, uIntResult) Then Throw New ArgumentException(String.Format("Cannot parse value '{0}' into UInt32", value), myWrappedPropertyName)
+            If Not UInt32.TryParse(value.ToString, uIntResult) Then _
+                Throw New ArgumentException(String.Format("Cannot parse value '{0}' into UInt32", value), myWrappedPropertyName)
             input = New Object() {uIntResult}
         Else
             Throw New InternalException("unknown parameter type '{0}'", targetType.FullName)
         End If
-        If ShouldProcess(TargetTag.Path, String.Format("set '{0}':'{1}'", myWrappedPropertyName, input)) Then
-            WhatIfMode = WhatIfModes.false
-        Else
-            WhatIfMode = WhatIfModes.true
-        End If
-        Dim command = String.Format("Set-Tag -Filename ""{0}"" -{1} $input", TargetTag.Path.Replace("""", """"""), myWrappedPropertyName)
+        Dim command = String.Format("Set-Tag -Fullname ""{0}"" -{1} $input", TargetTag.Path.Replace("""", """"""), myWrappedPropertyName)
+        Me.WriteVerbose("executing '{0}'", command)
         Dim pipe = Runspaces.Runspace.DefaultRunspace.CreateNestedPipeline(command, False)
         Dim pipeResult = pipe.Invoke(input)
         Return True
@@ -58,9 +58,5 @@
             myValue = value
         End Set
     End Property
-
-    Protected Overrides Sub EndProcessing()
-        WhatIfMode = WhatIfModes.none
-    End Sub
 
 End Class

@@ -1,4 +1,5 @@
 ﻿Public MustInherit Class TagCmdLetBase : Inherits CmdLetBase
+    Public Const NoParameterParameterSetName As String = "NoParameterParametersetName"
     Public Const DefaultParameterSetName As String = "byFilenName"
     Private Const HelpMessageFileName As String = "path to mediafile (mp3,ogg...)"
     Public Const TagParaneterSetName As String = "byTag"
@@ -6,30 +7,31 @@
 
     Protected Overrides Sub DoProcessRecord()
         Try
-            Dim targetTag = GetTargetTag()
-            Dim filename = targetTag.Path
-            ProcessTag(targetTag)
+            For Each targetTag In GetTargetTags()
+                Dim filename = targetTag.Path
+                ProcessTag(targetTag)
+            Next
         Catch ex As System.IO.FileNotFoundException
-            Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.ObjectNotFound, FileName))
+            Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.ObjectNotFound, FullName))
         Catch ex As TagLibException
-            Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.InvalidResult, FileName))
+            Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.InvalidResult, FullName))
         Catch ex As TagLib.UnsupportedFormatException
-            Me.WriteVerbose(String.Format("unsupported Format: '{0}", FileName))
+            Me.WriteVerbose(String.Format("unsupported Format: '{0}", FullName))
         Catch ex As TagLib.CorruptFileException
-            Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.InvalidData, FileName))
+            Me.WriteError(New ErrorRecord(ex, "GetTag", ErrorCategory.InvalidData, FullName))
         End Try
     End Sub
 
     Protected Overridable Sub ProcessTag(ByVal TargetFile As Tag)
     End Sub
 
-    Private Function GetTargetTag() As Tag
-        Dim back As Tag
+    Protected Overridable Function GetTargetTags() As Tag()
+        Dim back As Tag()
         Select Case Me.ParameterSetName
             Case TagParaneterSetName
-                back = Me.Tag
+                back = New Tag() {Me.Tag}
             Case DefaultParameterSetName
-                back = Tag.Create(Me.FileName)
+                back = New Tag() {Tag.Create(Me.FullName, Me.SessionPath)}
             Case Else
                 Throw New InternalException(String.Format("unknown Parametersetname {0}", Me.ParameterSetName))
         End Select
@@ -38,19 +40,19 @@
 
 #Region "Parameter"
 
-    Private myFileName As String
-    <Parameter(Mandatory:=True, ParameterSetName:=DefaultParameterSetName, ValueFromPipeline:=True, HelpMessage:=HelpMessageFileName)> _
-    Public Property FileName() As String
+    Private myFullName As String
+    <Parameter(Position:=0, Mandatory:=False, ParameterSetName:=DefaultParameterSetName, ValueFromPipeline:=True, ValueFromPipelinebyPropertyName:=True, HelpMessage:=HelpMessageFileName)> _
+    Public Property FullName() As String
         Get
-            Return myFileName
+            Return myFullName
         End Get
         Set(ByVal value As String)
-            myFileName = value
+            myFullName = value
         End Set
     End Property
 
     Private myTag As Tag
-    <Parameter(Mandatory:=True, ParameterSetName:=TagParaneterSetName, ValueFromPipeline:=True, HelpMessage:=HelpMessageTag)> _
+    <Parameter(Position:=0, Mandatory:=False, ParameterSetName:=TagParaneterSetName, ValueFromPipeline:=True, HelpMessage:=HelpMessageTag)> _
     Public Property Tag() As Tag
         Get
             Return myTag

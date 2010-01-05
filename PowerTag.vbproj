@@ -42,7 +42,8 @@
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>PowerTag.xml</DocumentationFile>
-    <NoWarn></NoWarn>
+    <NoWarn>
+    </NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -52,7 +53,8 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>PowerTag.xml</DocumentationFile>
-    <NoWarn></NoWarn>
+    <NoWarn>
+    </NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
@@ -86,10 +88,10 @@
     <Compile Include="CmdLets\Clear-Tag.vb" />
     <Compile Include="CmdLets\BaseClasses\CmdLetBase.vb" />
     <Compile Include="CmdLets\Get-GenreList.vb" />
-    <Compile Include="CmdLets\Get-MediaFile.vb" />
-    <Compile Include="CmdLets\Wrapper\GetTagCmdlets.vb" />
-    <Compile Include="CmdLets\Wrapper\SetTagCmdlets.vb" />
-    <Compile Include="Do-Test.vb" />
+    <Compile Include="CmdLets\Get-MediaItem.vb" />
+    <Compile Include="CmdLets\Get-TagCache.vb" />
+    <Compile Include="CmdLets\Wrapper\GetTagWrapper.vb" />
+    <Compile Include="CmdLets\Wrapper\SetTagWrapper.vb" />
     <Compile Include="CmdLets\BaseClasses\EditTagCmdLetBase.vb" />
     <Compile Include="CmdLets\Reset-Tag.vb" />
     <Compile Include="CmdLets\Save-Tag.vb" />
@@ -124,6 +126,7 @@
     <Compile Include="Tag\TagCache.vb" />
     <Compile Include="Tag\TagFactory.vb" />
     <Compile Include="Tag\VideoTag.vb" />
+    <Compile Include="Util.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -178,6 +181,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Manual.txt" />
     <Content Include="PowerTag.dll-Help.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

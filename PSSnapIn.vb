@@ -31,7 +31,7 @@ Public Class PowerTagSnapIn
     End Property
     Overrides ReadOnly Property Description() As String
         Get
-            Return "allows to view and edit mediatags"
+            Return "Provides CmdLets to query and manipulate tags from media files (.mp3, .ogg, .avi ect...)."
         End Get
     End Property
 

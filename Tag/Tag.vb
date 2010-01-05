@@ -3,6 +3,7 @@
     Protected Friend Sub New(ByVal File As TagLib.File)
         If File Is Nothing Then Throw New InternalException("File must not be null")
         myFile = File
+        myDirty = False
     End Sub
 
     Public Sub Reload()
@@ -29,10 +30,23 @@
         End Get
     End Property
 
+    Private myDirty As Boolean
+    Public ReadOnly Property Dirty() As Boolean
+        Get
+            Return Me.myDirty
+        End Get
+    End Property
+
+    Friend Sub MarkDirty()
+        WriteVerbose("mark tag as dirty")
+        myDirty = True
+    End Sub
+
 #Region "wrapped TagLib Methods"
     Public Sub Save()
-        WriteVerbose("saving '{0}'", Me.Path)
+        WriteVerbose("save tag")
         myFile.Save()
+        myDirty = False
     End Sub
 
     Public Sub Clear()
@@ -42,6 +56,12 @@
 #End Region
 
 #Region "Wrapped Taglib Properties"
+    Public ReadOnly Property FullName() As String
+        Get
+            Return Me.Path
+        End Get
+    End Property
+
     Public ReadOnly Property Path() As String
         Get
             Return myFile.Name
@@ -155,4 +175,7 @@
 
 #End Region 'logging
 
+    Public Overrides Function ToString() As String
+        Return System.IO.Path.GetFileName(Me.FullName)
+    End Function
 End Class

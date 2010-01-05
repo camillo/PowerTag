@@ -7,7 +7,7 @@
 	<command:details>
 		<command:name>Clear-Tag</command:name>
 		<maml:description>
-			<maml:para>Removes the tag from Media File</maml:para>
+			<maml:para>Clears a tag from Media File.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -20,27 +20,27 @@
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>The Clear-Tag cmdlet deletes all entries inside the specified tag.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Clear-Tag</maml:name>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>PassThru</maml:name>
 				<maml:description>
-					<maml:para>returns the cleared tag</maml:para>
+					<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -60,7 +60,7 @@
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>WhatIf</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>In WhatIf mode, changes to tags are not written to disk, but done in cache. Use Save-Tag or Reset-Tag or Clear-TagCache to handle changes.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -75,20 +75,20 @@
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>PassThru</maml:name>
 				<maml:description>
-					<maml:para>returns the cleared tag</maml:para>
+					<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>The target tag.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Tag</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -108,7 +108,7 @@
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>WhatIf</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>In WhatIf mode, changes to tags are not written to disk, but done in cache. Use Save-Tag or Reset-Tag or Clear-TagCache to handle changes.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -123,7 +123,7 @@
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>PassThru</maml:name>
 			<maml:description>
-				<maml:para>returns the cleared tag</maml:para>
+				<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -131,10 +131,10 @@
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Path to media file.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
@@ -146,7 +146,7 @@
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>UltraVerbose</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Show all verbose messages.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -181,7 +181,7 @@
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>WhatIf</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>In WhatIf mode, changes to tags are not written to disk, but done in cache. Use Save-Tag or Reset-Tag or Clear-TagCache to handle changes.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -200,10 +200,10 @@
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>The target tag.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Tag</command:parameterValue>
 			<dev:type>
@@ -216,10 +216,11 @@
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String, PowerTag.Tag</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>You can pipe a string that contains a path to Clear-Tag.
+You can pipe a tag to Clear-Tag.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -228,10 +229,10 @@
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>None: PowerTag.Tag</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>This cmdlet does not return any output by default. If -PassThru is used, the cleared Tag will be returned.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -254,9 +255,55 @@
 			<maml:introduction>
 				<maml:para>C:\PS&gt;</maml:para>
 C:\PS&gt;			</maml:introduction>
-  			<dev:code></dev:code>
+  			<dev:code>clear-tag .\test.mp3</dev:code>
   			<dev:remarks>
+				<maml:para>Clears the tag from 'test.mp3'.</maml:para>
 				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>clear-tag .\test.mp3 -PassThru</dev:code>
+  			<dev:remarks>
+				<maml:para>Clears the tag from 'test.mp3' and pipes the empty tag.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>Title Artists Album Filename
+----- ------- ----- --------
+      {}            test.mp3
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 3 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Tag | Clear-Tag</dev:code>
+  			<dev:remarks>
+				<maml:para>Clears all tags from files in current location.</maml:para>
 				<maml:para></maml:para>
 				<maml:para></maml:para>
 				<maml:para>
@@ -272,6 +319,14 @@ C:\PS&gt;			</maml:introduction>
 		</command:example>
 	</command:examples>
 	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Get-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
@@ -279,7 +334,7 @@ C:\PS&gt;			</maml:introduction>
 	<command:details>
 		<command:name>Clear-TagCache</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Clears the internal tag cache.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -292,7 +347,8 @@ C:\PS&gt;			</maml:introduction>
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>PowerTag stores references to touched tags inside an internal cache. Changes done to tags, using -WhatIf are not written to disk, but changed in memory. Later calls of Get-Tag will return the modified (but not stored) values (use -force to not use cache). 
+Clearing the cache will discard all unwritten changes.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Clear-TagCache</maml:name>
@@ -358,10 +414,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>none</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>This CmdLet does not take input parameter.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -370,10 +426,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>none</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>This CmdLet does not return any object.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -390,286 +446,42 @@ C:\PS&gt;			</maml:introduction>
 		</maml:alert>
 	</maml:alertSet>
 	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Clear-TagCache</dev:code>
+  			<dev:remarks>
+				<maml:para>This example clears the internal tag cache.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
 	</command:examples>
 	<maml:relatedLinks>
-	</maml:relatedLinks>
-</command:command>
-<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
-<!--Generated by Help Cmdlet Editor-->
-	<command:details>
-		<command:name>Do-Bla</command:name>
-		<maml:description>
-			<maml:para></maml:para>
-		</maml:description>
-		<maml:copyright>
-           <maml:para />
-		<!--Add copy right info here.-->
-		</maml:copyright>
-		<command:verb>Do</command:verb>
-		<command:noun>Bla</command:noun>
-		<!--Add Dev version info here.-->
-		<dev:version />
-	</command:details>
-	<maml:description>
-	<!--This is the Description section-->
-		<maml:para></maml:para>
-	</maml:description>
-	<command:syntax>		<command:syntaxItem>
-			<maml:name>Do-Bla</maml:name>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "1" >
-				<maml:name>Value</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>Force</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>UltraVerbose</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WarningAction</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "false" >ActionPreference</command:parameterValue>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WarningVariable</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
-			</command:parameter>
-		</command:syntaxItem>
-	</command:syntax>
-	<command:parameters>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1">
-			<maml:name>Value</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-			<dev:type>
-				<maml:name>String</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>Force</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>UltraVerbose</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>WarningAction</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-			<dev:type>
-				<maml:name>ActionPreference</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>WarningVariable</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-			<dev:type>
-				<maml:name>String</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-	</command:parameters>
-	<command:inputTypes>
-		<command:inputType>
-			<dev:type>
-				<maml:name></maml:name>
-				<maml:uri/>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</dev:type>
-			<maml:description></maml:description>
-		</command:inputType>
-	</command:inputTypes>
-	<command:returnValues>
-		<command:returnValue>
-			<dev:type>
-				<maml:name></maml:name>
-				<maml:uri />
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</dev:type>
-			<maml:description></maml:description>
-		</command:returnValue>
-	</command:returnValues>
-	<command:terminatingErrors>
-	</command:terminatingErrors>
-	<command:nonTerminatingErrors>
-	</command:nonTerminatingErrors>
-	<maml:alertSet>
-		<maml:title></maml:title>
-		<maml:alert>
-			<maml:para></maml:para>
-		</maml:alert>
-	</maml:alertSet>
-	<command:examples>
-	</command:examples>
-	<maml:relatedLinks>
-	</maml:relatedLinks>
-</command:command>
-<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
-<!--Generated by Help Cmdlet Editor-->
-	<command:details>
-		<command:name>Do-Test</command:name>
-		<maml:description>
-			<maml:para></maml:para>
-		</maml:description>
-		<maml:copyright>
-           <maml:para />
-		<!--Add copy right info here.-->
-		</maml:copyright>
-		<command:verb>Do</command:verb>
-		<command:noun>Test</command:noun>
-		<!--Add Dev version info here.-->
-		<dev:version />
-	</command:details>
-	<maml:description>
-	<!--This is the Description section-->
-		<maml:para></maml:para>
-	</maml:description>
-	<command:syntax>		<command:syntaxItem>
-			<maml:name>Do-Test</maml:name>
-			<command:parameter required = "false" variableLength = "true" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>ArrayTest</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "true" >String[]</command:parameterValue>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WarningAction</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "false" >ActionPreference</command:parameterValue>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WarningVariable</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
-			</command:parameter>
-		</command:syntaxItem>
-	</command:syntax>
-	<command:parameters>
-		<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
-			<maml:name>ArrayTest</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="true">String[]</command:parameterValue>
-			<dev:type>
-				<maml:name>String[]</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>WarningAction</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-			<dev:type>
-				<maml:name>ActionPreference</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>WarningVariable</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-			<dev:type>
-				<maml:name>String</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-	</command:parameters>
-	<command:inputTypes>
-		<command:inputType>
-			<dev:type>
-				<maml:name></maml:name>
-				<maml:uri/>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</dev:type>
-			<maml:description></maml:description>
-		</command:inputType>
-	</command:inputTypes>
-	<command:returnValues>
-		<command:returnValue>
-			<dev:type>
-				<maml:name></maml:name>
-				<maml:uri />
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</dev:type>
-			<maml:description></maml:description>
-		</command:returnValue>
-	</command:returnValues>
-	<command:terminatingErrors>
-	</command:terminatingErrors>
-	<command:nonTerminatingErrors>
-	</command:nonTerminatingErrors>
-	<maml:alertSet>
-		<maml:title></maml:title>
-		<maml:alert>
-			<maml:para></maml:para>
-		</maml:alert>
-	</maml:alertSet>
-	<command:examples>
-	</command:examples>
-	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Save-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Reset-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
@@ -677,7 +489,7 @@ C:\PS&gt;			</maml:introduction>
 	<command:details>
 		<command:name>Get-Album</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Extracts the pure album text.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -690,21 +502,14 @@ C:\PS&gt;			</maml:introduction>
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>This CmdLet extracts a single information (the album) from media's tag and returns this as String.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Get-Album</maml:name>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
-			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -721,32 +526,50 @@ C:\PS&gt;			</maml:introduction>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WhatIf</maml:name>
+		</command:syntaxItem>
+		<command:syntaxItem>
+			<maml:name>Get-Album</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file or directory.</maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>UltraVerbose</maml:name>
+				<maml:description>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>Confirm</maml:name>
+				<maml:name>WarningAction</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
 				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >ActionPreference</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>WarningVariable</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
 		</command:syntaxItem>
 		<command:syntaxItem>
 			<maml:name>Get-Album</maml:name>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Tag that's album will be extracted.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Tag</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -763,37 +586,13 @@ C:\PS&gt;			</maml:introduction>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WhatIf</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>Confirm</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
 		</command:syntaxItem>
 	</command:syntax>
 	<command:parameters>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-			<dev:type>
-				<maml:name>String</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>UltraVerbose</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Show all verbose messages.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -825,32 +624,22 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>WhatIf</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Path to media file or directory.</maml:para>
 			</maml:description>
+			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
+				<maml:name>String</maml:name>
 				<maml:uri/>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>Confirm</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Tag that's album will be extracted.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Tag</command:parameterValue>
 			<dev:type>
@@ -863,10 +652,11 @@ C:\PS&gt;			</maml:introduction>
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String; PowerTag.Tag; none</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>If a String is given, it must point to a file or directory.
+If neither Path nor Tag is given, all tags from current directory will be performed.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -875,10 +665,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>the album</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -891,12 +681,104 @@ C:\PS&gt;			</maml:introduction>
 	<maml:alertSet>
 		<maml:title></maml:title>
 		<maml:alert>
-			<maml:para></maml:para>
+			<maml:para>This is a wrapper CmdLet for Get-Tag.</maml:para>
 		</maml:alert>
 	</maml:alertSet>
 	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Album</dev:code>
+  			<dev:remarks>
+				<maml:para>This sample displays the album for every media file in current location.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>bar
+baz
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Album .\test.mp3</dev:code>
+  			<dev:remarks>
+				<maml:para>This sample displays the album from media file 'test.mp3'</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>bar
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 3 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-ChildItem -Recurse | Get-Album | Select-Object -Unique</dev:code>
+  			<dev:remarks>
+				<maml:para>This example lists all unique album titles from mediafiles in current location and child directories.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>bar
+baz
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
 	</command:examples>
 	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Get-Artists</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Genres</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Title</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Track</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Year</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
@@ -904,7 +786,7 @@ C:\PS&gt;			</maml:introduction>
 	<command:details>
 		<command:name>Get-Artists</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Extracts the pure artist.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -917,21 +799,14 @@ C:\PS&gt;			</maml:introduction>
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>This CmdLet extracts a single information (the artists) from media's tag and returns this as String.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Get-Artists</maml:name>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
-			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -948,32 +823,50 @@ C:\PS&gt;			</maml:introduction>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WhatIf</maml:name>
+		</command:syntaxItem>
+		<command:syntaxItem>
+			<maml:name>Get-Artists</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file or directory.</maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>UltraVerbose</maml:name>
+				<maml:description>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>Confirm</maml:name>
+				<maml:name>WarningAction</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
 				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >ActionPreference</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>WarningVariable</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
 		</command:syntaxItem>
 		<command:syntaxItem>
 			<maml:name>Get-Artists</maml:name>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Tag that's album will be extracted.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Tag</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -990,37 +883,13 @@ C:\PS&gt;			</maml:introduction>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WhatIf</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>Confirm</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
 		</command:syntaxItem>
 	</command:syntax>
 	<command:parameters>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-			<dev:type>
-				<maml:name>String</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>UltraVerbose</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Show all verbose messages.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -1052,32 +921,22 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>WhatIf</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Path to media file or directory.</maml:para>
 			</maml:description>
+			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
+				<maml:name>String</maml:name>
 				<maml:uri/>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>Confirm</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Tag that's album will be extracted.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Tag</command:parameterValue>
 			<dev:type>
@@ -1090,10 +949,11 @@ C:\PS&gt;			</maml:introduction>
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String; PowerTag.Tag; none</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>If a String is given, it must point to a file or directory.
+If neither Path nor Tag is given, all tags from current directory will be performed.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -1102,10 +962,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>the artists</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -1118,12 +978,104 @@ C:\PS&gt;			</maml:introduction>
 	<maml:alertSet>
 		<maml:title></maml:title>
 		<maml:alert>
-			<maml:para></maml:para>
+			<maml:para>This is a wrapper CmdLet for Get-Tag.</maml:para>
 		</maml:alert>
 	</maml:alertSet>
 	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Artists</dev:code>
+  			<dev:remarks>
+				<maml:para>This sample displays the artists for every media file in current location.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>bar
+baz
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Artists .\test.mp3</dev:code>
+  			<dev:remarks>
+				<maml:para>This sample displays the artists from media file 'test.mp3'</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>bar
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 3 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-ChildItem -Recurse | Get-Artists | Select-Object -Unique</dev:code>
+  			<dev:remarks>
+				<maml:para>This example lists all unique artists from mediafiles in current location and child directories.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>bar
+baz
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
 	</command:examples>
 	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Get-Album</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Genres</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Title</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Track</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Year</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
@@ -1131,7 +1083,7 @@ C:\PS&gt;			</maml:introduction>
 	<command:details>
 		<command:name>Get-GenreList</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Returns a list of all genres, known by the library.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -1144,26 +1096,28 @@ C:\PS&gt;			</maml:introduction>
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>This CmdLet returns a list of known genres. If neither -Audio nor -Video is set, all genres will be returned.
+
+This CmdLet does not search your media files for genres, but queries a static list. Use 'Get-Tag | Format-Table Genres' to get a list of used genres.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Get-GenreList</maml:name>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>Audio</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Return only audio genres.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>Video</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Return only video genres.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "1" >
+			<command:parameter required = "false" variableLength = "false" globbing = "true" pipelineInput = "false" position = "1" >
 				<maml:name>Filter</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Return only genres, that match the filter.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
@@ -1193,7 +1147,7 @@ C:\PS&gt;			</maml:introduction>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>Audio</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Return only audio genres.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -1204,7 +1158,7 @@ C:\PS&gt;			</maml:introduction>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>Video</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Return only video genres.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -1212,10 +1166,10 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1">
+		<command:parameter required="false" variableLength="false" globbing="true" pipelineInput="false" position="1">
 			<maml:name>Filter</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Return only genres, that match the filter.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
@@ -1263,10 +1217,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>none</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>This CmdLet does not take any input.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -1275,10 +1229,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String()</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>A flat list of genre names.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -1291,12 +1245,105 @@ C:\PS&gt;			</maml:introduction>
 	<maml:alertSet>
 		<maml:title></maml:title>
 		<maml:alert>
-			<maml:para></maml:para>
+			<maml:para>Feel free to use any genre name you like, but this is the 'official' list.</maml:para>
 		</maml:alert>
 	</maml:alertSet>
 	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-GenreList</dev:code>
+  			<dev:remarks>
+				<maml:para>This example lists all known genres.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>Action
+Action/Adventure
+Adult
+Adventure
+...
+Anime
+Jpop
+Synthpop
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-GenreList -Video</dev:code>
+  			<dev:remarks>
+				<maml:para>This example lists all known video genres.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>Action
+Action/Adventure
+Adult
+Adventure
+...
+Splatter
+Sports
+Thriller
+Western
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 3 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-GenreList -Audio</dev:code>
+  			<dev:remarks>
+				<maml:para>This example lists all known audio genres.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>Blues
+Classic Rock
+Country
+...
+Salsa
+Thrash Metal
+Anime
+Jpop
+Synthpop
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
 	</command:examples>
 	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Get-Genres</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
@@ -1304,7 +1351,7 @@ C:\PS&gt;			</maml:introduction>
 	<command:details>
 		<command:name>Get-Genres</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Extracts the pure genre text.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -1317,21 +1364,14 @@ C:\PS&gt;			</maml:introduction>
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>This CmdLet extracts a single information (the genres) from media's tag and returns this as String.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Get-Genres</maml:name>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
-			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -1348,32 +1388,50 @@ C:\PS&gt;			</maml:introduction>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WhatIf</maml:name>
+		</command:syntaxItem>
+		<command:syntaxItem>
+			<maml:name>Get-Genres</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file or directory.</maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>UltraVerbose</maml:name>
+				<maml:description>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>Confirm</maml:name>
+				<maml:name>WarningAction</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
 				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >ActionPreference</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>WarningVariable</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
 		</command:syntaxItem>
 		<command:syntaxItem>
 			<maml:name>Get-Genres</maml:name>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Tag that's generes will be extracted.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Tag</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -1390,37 +1448,13 @@ C:\PS&gt;			</maml:introduction>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WhatIf</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>Confirm</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
 		</command:syntaxItem>
 	</command:syntax>
 	<command:parameters>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-			<dev:type>
-				<maml:name>String</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>UltraVerbose</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Show all verbose messages.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -1452,32 +1486,22 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>WhatIf</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Path to media file or directory.</maml:para>
 			</maml:description>
+			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
+				<maml:name>String</maml:name>
 				<maml:uri/>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>Confirm</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Tag that's generes will be extracted.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Tag</command:parameterValue>
 			<dev:type>
@@ -1490,10 +1514,11 @@ C:\PS&gt;			</maml:introduction>
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String; PowerTag.Tag; none</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>If a String is given, it must point to a file or directory.
+If neither Path nor Tag is given, all tags from current directory will be performed.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -1502,10 +1527,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>the genres</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -1518,166 +1543,144 @@ C:\PS&gt;			</maml:introduction>
 	<maml:alertSet>
 		<maml:title></maml:title>
 		<maml:alert>
-			<maml:para></maml:para>
+			<maml:para>This is a wrapper CmdLet for Get-Tag.</maml:para>
 		</maml:alert>
 	</maml:alertSet>
 	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Genres</dev:code>
+  			<dev:remarks>
+				<maml:para>This sample displays the genres for every media file in current location.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>rock
+pop
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Genres .\test.mp3</dev:code>
+  			<dev:remarks>
+				<maml:para>This sample displays the genres from media file 'test.mp3'</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>rock
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 3 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-ChildItem -Recurse | Get-Genres | Select-Object -Unique</dev:code>
+  			<dev:remarks>
+				<maml:para>This example lists all unique generes from mediafiles in current location and child directories.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>rock
+pop
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
 	</command:examples>
 	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Get-Album</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Artists</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Title</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Track</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Year</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-GenreList</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
 <!--Generated by Help Cmdlet Editor-->
 	<command:details>
-		<command:name>Get-MediaFile</command:name>
+		<command:name>Get-MediaItem</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Returns a list of all media files.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
 		<!--Add copy right info here.-->
 		</maml:copyright>
 		<command:verb>Get</command:verb>
-		<command:noun>MediaFile</command:noun>
+		<command:noun>MediaItem</command:noun>
 		<!--Add Dev version info here.-->
 		<dev:version />
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>This CmdLet returns all media files at given or current location.
+It does not return a tag, but FileInfo objects (like Get-ChildItem), so you can pipe the result into normal buildin powershell Commands.
+If used on a single file, the file will be tested and returned, if it has a valid media extension.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
-			<maml:name>Get-MediaFile</maml:name>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>UltraVerbose</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WarningAction</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "false" >ActionPreference</command:parameterValue>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WarningVariable</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
-			</command:parameter>
-		</command:syntaxItem>
-	</command:syntax>
-	<command:parameters>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>UltraVerbose</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>WarningAction</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-			<dev:type>
-				<maml:name>ActionPreference</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>WarningVariable</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-			<dev:type>
-				<maml:name>String</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-	</command:parameters>
-	<command:inputTypes>
-		<command:inputType>
-			<dev:type>
-				<maml:name></maml:name>
-				<maml:uri/>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</dev:type>
-			<maml:description></maml:description>
-		</command:inputType>
-	</command:inputTypes>
-	<command:returnValues>
-		<command:returnValue>
-			<dev:type>
-				<maml:name></maml:name>
-				<maml:uri />
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</dev:type>
-			<maml:description></maml:description>
-		</command:returnValue>
-	</command:returnValues>
-	<command:terminatingErrors>
-	</command:terminatingErrors>
-	<command:nonTerminatingErrors>
-	</command:nonTerminatingErrors>
-	<maml:alertSet>
-		<maml:title></maml:title>
-		<maml:alert>
-			<maml:para></maml:para>
-		</maml:alert>
-	</maml:alertSet>
-	<command:examples>
-	</command:examples>
-	<maml:relatedLinks>
-	</maml:relatedLinks>
-</command:command>
-<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
-<!--Generated by Help Cmdlet Editor-->
-	<command:details>
-		<command:name>Get-Tag</command:name>
-		<maml:description>
-			<maml:para>Returns media information about audio and video files.</maml:para>
-		</maml:description>
-		<maml:copyright>
-           <maml:para />
-		<!--Add copy right info here.-->
-		</maml:copyright>
-		<command:verb>Get</command:verb>
-		<command:noun>Tag</command:noun>
-		<!--Add Dev version info here.-->
-		<dev:version />
-	</command:details>
-	<maml:description>
-	<!--This is the Description section-->
-		<maml:para></maml:para>
-	</maml:description>
-	<command:syntax>		<command:syntaxItem>
-			<maml:name>Get-Tag</maml:name>
+			<maml:name>Get-MediaItem</maml:name>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>Recursive</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>If set, also child directories will be scaned.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
-				<maml:name>FileName</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to file or directory.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
@@ -1707,6 +1710,29 @@ C:\PS&gt;			</maml:introduction>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>Recursive</maml:name>
 			<maml:description>
+				<maml:para>If set, also child directories will be scaned.</maml:para>
+			</maml:description>
+			<dev:type>
+				<maml:name>SwitchParameter</maml:name>
+				<maml:uri/>
+			</dev:type>
+			<dev:defaultValue></dev:defaultValue>
+		</command:parameter>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
+			<maml:description>
+				<maml:para>Path to file or directory.</maml:para>
+			</maml:description>
+			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+			<dev:type>
+				<maml:name>String</maml:name>
+				<maml:uri/>
+			</dev:type>
+			<dev:defaultValue></dev:defaultValue>
+		</command:parameter>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+			<maml:name>UltraVerbose</maml:name>
+			<maml:description>
 				<maml:para></maml:para>
 			</maml:description>
 			<dev:type>
@@ -1715,14 +1741,495 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
-			<maml:name>FileName</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+			<maml:name>WarningAction</maml:name>
+			<maml:description>
+				<maml:para></maml:para>
+			</maml:description>
+			<command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
+			<dev:type>
+				<maml:name>ActionPreference</maml:name>
+				<maml:uri/>
+			</dev:type>
+			<dev:defaultValue></dev:defaultValue>
+		</command:parameter>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+			<maml:name>WarningVariable</maml:name>
 			<maml:description>
 				<maml:para></maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
 				<maml:name>String</maml:name>
+				<maml:uri/>
+			</dev:type>
+			<dev:defaultValue></dev:defaultValue>
+		</command:parameter>
+	</command:parameters>
+	<command:inputTypes>
+		<command:inputType>
+			<dev:type>
+				<maml:name>System.String</maml:name>
+				<maml:uri/>
+				<maml:description>
+					<maml:para>Path to a file or directory.</maml:para>
+				</maml:description>
+			</dev:type>
+			<maml:description></maml:description>
+		</command:inputType>
+	</command:inputTypes>
+	<command:returnValues>
+		<command:returnValue>
+			<dev:type>
+				<maml:name>System.IO.FileInfo</maml:name>
+				<maml:uri />
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</dev:type>
+			<maml:description></maml:description>
+		</command:returnValue>
+	</command:returnValues>
+	<command:terminatingErrors>
+	</command:terminatingErrors>
+	<command:nonTerminatingErrors>
+	</command:nonTerminatingErrors>
+	<maml:alertSet>
+		<maml:title></maml:title>
+		<maml:alert>
+			<maml:para>Mediafiles are detected by their extension.</maml:para>
+		</maml:alert>
+	</maml:alertSet>
+	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-MediaItem</dev:code>
+  			<dev:remarks>
+				<maml:para>This example lists all media files in current location.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>Mode                LastWriteTime     Length Name
+----                -------------     ------ ----
+-a---        04.01.2010     14:49    5089323 test.mp3
+-a---        04.01.2010     12:54    5089323 test2.mp3
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-ChildItem -Include Nell* -Recurse | Get-MediaItem | Copy-Item -Destination .\tmpMedia</dev:code>
+  			<dev:remarks>
+				<maml:para>This example shows, how to do normal powershell voodoo and pipe the result into Get-Mediafile to select only media files and copy them into one single folder.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+	</command:examples>
+	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Get-ChildItem</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Copy-Item</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Move-Item</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+	</maml:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+<!--Generated by Help Cmdlet Editor-->
+	<command:details>
+		<command:name>Get-Tag</command:name>
+		<maml:description>
+			<maml:para>Returns the tag from a media file.</maml:para>
+		</maml:description>
+		<maml:copyright>
+           <maml:para />
+		<!--Add copy right info here.-->
+		</maml:copyright>
+		<command:verb>Get</command:verb>
+		<command:noun>Tag</command:noun>
+		<!--Add Dev version info here.-->
+		<dev:version />
+	</command:details>
+	<maml:description>
+	<!--This is the Description section-->
+		<maml:para>The Get-Tag CmdLet extracts the meta information from media files.
+If performed on an directory, it returns all tags from contained media files.</maml:para>
+	</maml:description>
+	<command:syntax>		<command:syntaxItem>
+			<maml:name>Get-Tag</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>Recursive</maml:name>
+				<maml:description>
+					<maml:para>If set and FileName points to a directory, Get-Tag will also return all tags from media files in child direcotries.</maml:para>
+				</maml:description>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "true" pipelineInput = "false" position = "named" >
+				<maml:name>Title</maml:name>
+				<maml:description>
+					<maml:para>If set, only tags that Title match the filter, will be returned.</maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "true" pipelineInput = "false" position = "named" >
+				<maml:name>Artist</maml:name>
+				<maml:description>
+					<maml:para>If set, only tags that Artist match the filter, will be returned.</maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "true" pipelineInput = "false" position = "named" >
+				<maml:name>Album</maml:name>
+				<maml:description>
+					<maml:para>If set, only tags that Album match the filter, will be returned.</maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>Force</maml:name>
+				<maml:description>
+					<maml:para>If set, TagCache will not be used.</maml:para>
+				</maml:description>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>UltraVerbose</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>WarningAction</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >ActionPreference</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>WarningVariable</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
+			</command:parameter>
+		</command:syntaxItem>
+	</command:syntax>
+	<command:parameters>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+			<maml:name>Recursive</maml:name>
+			<maml:description>
+				<maml:para>If set and FileName points to a directory, Get-Tag will also return all tags from media files in child direcotries.</maml:para>
+			</maml:description>
+			<dev:type>
+				<maml:name>SwitchParameter</maml:name>
+				<maml:uri/>
+			</dev:type>
+			<dev:defaultValue>false</dev:defaultValue>
+		</command:parameter>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
+			<maml:description>
+				<maml:para></maml:para>
+			</maml:description>
+			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+			<dev:type>
+				<maml:name>String</maml:name>
+				<maml:uri/>
+			</dev:type>
+			<dev:defaultValue></dev:defaultValue>
+		</command:parameter>
+		<command:parameter required="false" variableLength="false" globbing="true" pipelineInput="false" position="named">
+			<maml:name>Title</maml:name>
+			<maml:description>
+				<maml:para>If set, only tags that Title match the filter, will be returned.</maml:para>
+			</maml:description>
+			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+			<dev:type>
+				<maml:name>String</maml:name>
+				<maml:uri/>
+			</dev:type>
+			<dev:defaultValue></dev:defaultValue>
+		</command:parameter>
+		<command:parameter required="false" variableLength="false" globbing="true" pipelineInput="false" position="named">
+			<maml:name>Artist</maml:name>
+			<maml:description>
+				<maml:para>If set, only tags that Artist match the filter, will be returned.</maml:para>
+			</maml:description>
+			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+			<dev:type>
+				<maml:name>String</maml:name>
+				<maml:uri/>
+			</dev:type>
+			<dev:defaultValue></dev:defaultValue>
+		</command:parameter>
+		<command:parameter required="false" variableLength="false" globbing="true" pipelineInput="false" position="named">
+			<maml:name>Album</maml:name>
+			<maml:description>
+				<maml:para>If set, only tags that Album match the filter, will be returned.</maml:para>
+			</maml:description>
+			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+			<dev:type>
+				<maml:name>String</maml:name>
+				<maml:uri/>
+			</dev:type>
+			<dev:defaultValue></dev:defaultValue>
+		</command:parameter>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+			<maml:name>Force</maml:name>
+			<maml:description>
+				<maml:para>If set, TagCache will not be used.</maml:para>
+			</maml:description>
+			<dev:type>
+				<maml:name>SwitchParameter</maml:name>
+				<maml:uri/>
+			</dev:type>
+			<dev:defaultValue></dev:defaultValue>
+		</command:parameter>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+			<maml:name>UltraVerbose</maml:name>
+			<maml:description>
+				<maml:para></maml:para>
+			</maml:description>
+			<dev:type>
+				<maml:name>SwitchParameter</maml:name>
+				<maml:uri/>
+			</dev:type>
+			<dev:defaultValue></dev:defaultValue>
+		</command:parameter>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+			<maml:name>WarningAction</maml:name>
+			<maml:description>
+				<maml:para></maml:para>
+			</maml:description>
+			<command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
+			<dev:type>
+				<maml:name>ActionPreference</maml:name>
+				<maml:uri/>
+			</dev:type>
+			<dev:defaultValue></dev:defaultValue>
+		</command:parameter>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+			<maml:name>WarningVariable</maml:name>
+			<maml:description>
+				<maml:para></maml:para>
+			</maml:description>
+			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+			<dev:type>
+				<maml:name>String</maml:name>
+				<maml:uri/>
+			</dev:type>
+			<dev:defaultValue></dev:defaultValue>
+		</command:parameter>
+	</command:parameters>
+	<command:inputTypes>
+		<command:inputType>
+			<dev:type>
+				<maml:name>System.String</maml:name>
+				<maml:uri/>
+				<maml:description>
+					<maml:para>Path to media file or directory.</maml:para>
+				</maml:description>
+			</dev:type>
+			<maml:description></maml:description>
+		</command:inputType>
+	</command:inputTypes>
+	<command:returnValues>
+		<command:returnValue>
+			<dev:type>
+				<maml:name>PowerTag.Tag</maml:name>
+				<maml:uri />
+				<maml:description>
+					<maml:para>the tag of the media file</maml:para>
+				</maml:description>
+			</dev:type>
+			<maml:description></maml:description>
+		</command:returnValue>
+	</command:returnValues>
+	<command:terminatingErrors>
+	</command:terminatingErrors>
+	<command:nonTerminatingErrors>
+	</command:nonTerminatingErrors>
+	<maml:alertSet>
+		<maml:title></maml:title>
+		<maml:alert>
+			<maml:para></maml:para>
+		</maml:alert>
+	</maml:alertSet>
+	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Tag</dev:code>
+  			<dev:remarks>
+				<maml:para>Returns all Tags from media files in current directory.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>Title        Artists Album Filename
+-----        ------- ----- --------
+Test title   {foo}   bar   test.mp3
+second title {bar}   baz   test2.mp3
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>get-tag -Title t*</dev:code>
+  			<dev:remarks>
+				<maml:para>Returns all Tags from media files in current directory, that's title start with 't'.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>Title        Artists Album Filename
+-----        ------- ----- --------
+Test title   {foo}   bar   test.mp3
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+	</command:examples>
+	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Get-Album</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Artists</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Genres</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Title</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Track</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Year</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+	</maml:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+<!--Generated by Help Cmdlet Editor-->
+	<command:details>
+		<command:name>Get-TagCache</command:name>
+		<maml:description>
+			<maml:para></maml:para>
+		</maml:description>
+		<maml:copyright>
+           <maml:para />
+		<!--Add copy right info here.-->
+		</maml:copyright>
+		<command:verb>Get</command:verb>
+		<command:noun>TagCache</command:noun>
+		<!--Add Dev version info here.-->
+		<dev:version />
+	</command:details>
+	<maml:description>
+	<!--This is the Description section-->
+		<maml:para></maml:para>
+	</maml:description>
+	<command:syntax>		<command:syntaxItem>
+			<maml:name>Get-TagCache</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>Dirty</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>UltraVerbose</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>WarningAction</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >ActionPreference</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>WarningVariable</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
+			</command:parameter>
+		</command:syntaxItem>
+	</command:syntax>
+	<command:parameters>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+			<maml:name>Dirty</maml:name>
+			<maml:description>
+				<maml:para></maml:para>
+			</maml:description>
+			<dev:type>
+				<maml:name>SwitchParameter</maml:name>
 				<maml:uri/>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
@@ -1807,7 +2314,7 @@ C:\PS&gt;			</maml:introduction>
 	<command:details>
 		<command:name>Get-Title</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Extracts the pure title.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -1820,21 +2327,14 @@ C:\PS&gt;			</maml:introduction>
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>This CmdLet extracts a single information (the title) from media's tag and returns this as String.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Get-Title</maml:name>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
-			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -1851,32 +2351,50 @@ C:\PS&gt;			</maml:introduction>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WhatIf</maml:name>
+		</command:syntaxItem>
+		<command:syntaxItem>
+			<maml:name>Get-Title</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file or directory.</maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>UltraVerbose</maml:name>
+				<maml:description>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>Confirm</maml:name>
+				<maml:name>WarningAction</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
 				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >ActionPreference</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>WarningVariable</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
 		</command:syntaxItem>
 		<command:syntaxItem>
 			<maml:name>Get-Title</maml:name>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Tag that's title will be extracted.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Tag</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -1893,37 +2411,13 @@ C:\PS&gt;			</maml:introduction>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WhatIf</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>Confirm</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
 		</command:syntaxItem>
 	</command:syntax>
 	<command:parameters>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-			<dev:type>
-				<maml:name>String</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>UltraVerbose</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Show all verbose messages.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -1955,32 +2449,22 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>WhatIf</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Path to media file or directory.</maml:para>
 			</maml:description>
+			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
+				<maml:name>String</maml:name>
 				<maml:uri/>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>Confirm</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Tag that's title will be extracted.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Tag</command:parameterValue>
 			<dev:type>
@@ -1993,10 +2477,11 @@ C:\PS&gt;			</maml:introduction>
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String; PowerTag.Tag; none</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>If a String is given, it must point to a file or directory.
+If neither Path nor Tag is given, all tags from current directory will be performed.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -2005,10 +2490,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>the title</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -2021,12 +2506,81 @@ C:\PS&gt;			</maml:introduction>
 	<maml:alertSet>
 		<maml:title></maml:title>
 		<maml:alert>
-			<maml:para></maml:para>
+			<maml:para>This is a wrapper CmdLet for Get-Tag.</maml:para>
 		</maml:alert>
 	</maml:alertSet>
 	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Title</dev:code>
+  			<dev:remarks>
+				<maml:para>This sample displays the title for every media file in current location.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>bar
+baz
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Title .\test.mp3</dev:code>
+  			<dev:remarks>
+				<maml:para>This sample displays the title from media file 'test.mp3'</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>bar
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
 	</command:examples>
 	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Get-Album</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Artists</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Genres</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Track</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Year</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
@@ -2034,7 +2588,7 @@ C:\PS&gt;			</maml:introduction>
 	<command:details>
 		<command:name>Get-Track</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Extracts the pure track number.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -2047,21 +2601,14 @@ C:\PS&gt;			</maml:introduction>
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>This CmdLet extracts a single information (the track number) from media's tag and returns this as String.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Get-Track</maml:name>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
-			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -2078,32 +2625,50 @@ C:\PS&gt;			</maml:introduction>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WhatIf</maml:name>
+		</command:syntaxItem>
+		<command:syntaxItem>
+			<maml:name>Get-Track</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file or directory.</maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>UltraVerbose</maml:name>
+				<maml:description>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>Confirm</maml:name>
+				<maml:name>WarningAction</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
 				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >ActionPreference</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>WarningVariable</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
 		</command:syntaxItem>
 		<command:syntaxItem>
 			<maml:name>Get-Track</maml:name>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Tag that's track number will be extracted.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Tag</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -2120,37 +2685,13 @@ C:\PS&gt;			</maml:introduction>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WhatIf</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>Confirm</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
 		</command:syntaxItem>
 	</command:syntax>
 	<command:parameters>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-			<dev:type>
-				<maml:name>String</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>UltraVerbose</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Show all verbose messages.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -2182,32 +2723,22 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>WhatIf</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Path to media file or directory.</maml:para>
 			</maml:description>
+			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
+				<maml:name>String</maml:name>
 				<maml:uri/>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>Confirm</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Tag that's track number will be extracted.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Tag</command:parameterValue>
 			<dev:type>
@@ -2220,10 +2751,11 @@ C:\PS&gt;			</maml:introduction>
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String; PowerTag.Tag; none</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>If a String is given, it must point to a file or directory.
+If neither Path nor Tag is given, all tags from current directory will be performed.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -2232,10 +2764,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>Integer</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>the track number</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -2248,12 +2780,81 @@ C:\PS&gt;			</maml:introduction>
 	<maml:alertSet>
 		<maml:title></maml:title>
 		<maml:alert>
-			<maml:para></maml:para>
+			<maml:para>This is a wrapper CmdLet for Get-Tag.</maml:para>
 		</maml:alert>
 	</maml:alertSet>
 	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Track</dev:code>
+  			<dev:remarks>
+				<maml:para>This sample displays the track number for every media file in current location.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>1
+2
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Track .\test.mp3</dev:code>
+  			<dev:remarks>
+				<maml:para>This sample displays the track number from media file 'test.mp3'</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>42
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
 	</command:examples>
 	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Get-Album</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Artists</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Genres</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Title</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Year</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
@@ -2261,7 +2862,7 @@ C:\PS&gt;			</maml:introduction>
 	<command:details>
 		<command:name>Get-Year</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Extracts the pure year.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -2274,21 +2875,14 @@ C:\PS&gt;			</maml:introduction>
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>This CmdLet extracts a single information (the year) from media's tag and returns this as String.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Get-Year</maml:name>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
-			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -2305,32 +2899,50 @@ C:\PS&gt;			</maml:introduction>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WhatIf</maml:name>
+		</command:syntaxItem>
+		<command:syntaxItem>
+			<maml:name>Get-Year</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file or directory.</maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>UltraVerbose</maml:name>
+				<maml:description>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>Confirm</maml:name>
+				<maml:name>WarningAction</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
 				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >ActionPreference</command:parameterValue>
+			</command:parameter>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
+				<maml:name>WarningVariable</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
 		</command:syntaxItem>
 		<command:syntaxItem>
 			<maml:name>Get-Year</maml:name>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Tag that's year will be extracted.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Tag</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>UltraVerbose</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Show all verbose messages.</maml:para>
 				</maml:description>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
@@ -2347,37 +2959,13 @@ C:\PS&gt;			</maml:introduction>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>WhatIf</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
-			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
-				<maml:name>Confirm</maml:name>
-				<maml:description>
-					<maml:para></maml:para>
-				</maml:description>
-			</command:parameter>
 		</command:syntaxItem>
 	</command:syntax>
 	<command:parameters>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-			<dev:type>
-				<maml:name>String</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>UltraVerbose</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Show all verbose messages.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -2409,32 +2997,22 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>WhatIf</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Path to media file or directory.</maml:para>
 			</maml:description>
+			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
+				<maml:name>String</maml:name>
 				<maml:uri/>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
-			<maml:name>Confirm</maml:name>
-			<maml:description>
-				<maml:para></maml:para>
-			</maml:description>
-			<dev:type>
-				<maml:name>SwitchParameter</maml:name>
-				<maml:uri/>
-			</dev:type>
-			<dev:defaultValue></dev:defaultValue>
-		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Tag that's year will be extracted.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Tag</command:parameterValue>
 			<dev:type>
@@ -2447,10 +3025,11 @@ C:\PS&gt;			</maml:introduction>
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String; PowerTag.Tag; none</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>If a String is given, it must point to a file or directory.
+If neither Path nor Tag is given, all tags from current directory will be performed.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -2459,10 +3038,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>Integer</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>the album</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -2475,12 +3054,81 @@ C:\PS&gt;			</maml:introduction>
 	<maml:alertSet>
 		<maml:title></maml:title>
 		<maml:alert>
-			<maml:para></maml:para>
+			<maml:para>This is a wrapper CmdLet for Get-Tag.</maml:para>
 		</maml:alert>
 	</maml:alertSet>
 	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Year</dev:code>
+  			<dev:remarks>
+				<maml:para>This sample displays the year for every media file in current location.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>2007
+2010
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-Year .\test.mp3</dev:code>
+  			<dev:remarks>
+				<maml:para>This sample displays the year from media file 'test.mp3'</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>2010
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
 	</command:examples>
 	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Get-Album</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Artists</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Genres</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Title</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Track</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Get-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
@@ -2488,7 +3136,7 @@ C:\PS&gt;			</maml:introduction>
 	<command:details>
 		<command:name>Reset-Tag</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Discards changes to the tag, not written to disk.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -2501,20 +3149,20 @@ C:\PS&gt;			</maml:introduction>
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>This CmdLet discards changes to the specified tag and updates the TagCache.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Reset-Tag</maml:name>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>PassThru</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
@@ -2544,13 +3192,13 @@ C:\PS&gt;			</maml:introduction>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>PassThru</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>The target tag.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Tag</command:parameterValue>
 			</command:parameter>
@@ -2580,7 +3228,7 @@ C:\PS&gt;			</maml:introduction>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>PassThru</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -2588,10 +3236,10 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Path to media file.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
@@ -2635,10 +3283,10 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>The target tag.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Tag</command:parameterValue>
 			<dev:type>
@@ -2651,10 +3299,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String; PowerTag.Tag</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file or the tag itself.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -2663,10 +3311,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>none</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>This CmdLet does not return data.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -2683,8 +3331,60 @@ C:\PS&gt;			</maml:introduction>
 		</maml:alert>
 	</maml:alertSet>
 	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Reset-Tag .\test.mp3</dev:code>
+  			<dev:remarks>
+				<maml:para>Reset the tag from a single file.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-MediaFile | Reset-Tag</dev:code>
+  			<dev:remarks>
+				<maml:para>Reset the tags from all media files in current location.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
 	</command:examples>
 	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Save-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Clear-TagCache</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
@@ -2692,7 +3392,7 @@ C:\PS&gt;			</maml:introduction>
 	<command:details>
 		<command:name>Save-Tag</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Saves changes to the tag, not written to disk.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -2705,20 +3405,20 @@ C:\PS&gt;			</maml:introduction>
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>This CmdLet saves changes to the specified tag.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Save-Tag</maml:name>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>PassThru</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
@@ -2748,13 +3448,13 @@ C:\PS&gt;			</maml:introduction>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>PassThru</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>The target tag.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Tag</command:parameterValue>
 			</command:parameter>
@@ -2784,7 +3484,7 @@ C:\PS&gt;			</maml:introduction>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>PassThru</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -2792,10 +3492,10 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Path to media file.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
@@ -2839,10 +3539,10 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>The target tag.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Tag</command:parameterValue>
 			<dev:type>
@@ -2855,10 +3555,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String; PowerTag.Tag</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file or the tag itself.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -2867,10 +3567,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>none</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>This CmdLet does not return data.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -2887,8 +3587,60 @@ C:\PS&gt;			</maml:introduction>
 		</maml:alert>
 	</maml:alertSet>
 	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Save-Tag .\test.mp3</dev:code>
+  			<dev:remarks>
+				<maml:para>Save the tag from a single file.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-MediaFile | Save-Tag</dev:code>
+  			<dev:remarks>
+				<maml:para>Save the tags from all media files in current location.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
 	</command:examples>
 	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>ResetTag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Clear-TagCache</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
@@ -2896,7 +3648,7 @@ C:\PS&gt;			</maml:introduction>
 	<command:details>
 		<command:name>Set-Album</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Set the album of a tag.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -2909,27 +3661,27 @@ C:\PS&gt;			</maml:introduction>
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>This CmdLet sets the album of a tag.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Set-Album</maml:name>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "1" >
 				<maml:name>Value</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>The name of the album.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Object</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>PassThru</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
@@ -2971,20 +3723,20 @@ C:\PS&gt;			</maml:introduction>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "1" >
 				<maml:name>Value</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>The name of the album.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Object</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>PassThru</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>The target tag.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Tag</command:parameterValue>
 			</command:parameter>
@@ -3026,7 +3778,7 @@ C:\PS&gt;			</maml:introduction>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1">
 			<maml:name>Value</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>The name of the album.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
 			<dev:type>
@@ -3038,7 +3790,7 @@ C:\PS&gt;			</maml:introduction>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>PassThru</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -3046,10 +3798,10 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Path to media file.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
@@ -3115,10 +3867,10 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>The target tag.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Tag</command:parameterValue>
 			<dev:type>
@@ -3131,10 +3883,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String; PowerTag.Tag</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>If a String is given, it must point to a media file.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -3143,10 +3895,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>the artists</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -3159,12 +3911,83 @@ C:\PS&gt;			</maml:introduction>
 	<maml:alertSet>
 		<maml:title></maml:title>
 		<maml:alert>
-			<maml:para></maml:para>
+			<maml:para>This is a wrapper CmdLet for Set-Tag.</maml:para>
 		</maml:alert>
 	</maml:alertSet>
 	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Set-Album .\test.mp3 -Value &quot;new album name&quot;</dev:code>
+  			<dev:remarks>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Get-MediaFile | Set-Album -Value foo -PassThru</dev:code>
+  			<dev:remarks>
+				<maml:para>sets the album for all files in current location; modified files are shown because of -PassThru</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>Title        Artists Album Filename
+-----        ------- ----- --------
+Test title   {foo}   foo   test.mp3
+second title {bar}   foo   test2.mp3
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
 	</command:examples>
 	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Set-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Album</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Artists</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Genres</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Title</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Year</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
@@ -3172,7 +3995,7 @@ C:\PS&gt;			</maml:introduction>
 	<command:details>
 		<command:name>Set-Artists</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Set the artist of a tag.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -3185,27 +4008,27 @@ C:\PS&gt;			</maml:introduction>
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>This CmdLet sets the artist(s) of a tag.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Set-Artists</maml:name>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "1" >
 				<maml:name>Value</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>The name of the artist(s).</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Object</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>PassThru</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
@@ -3247,20 +4070,20 @@ C:\PS&gt;			</maml:introduction>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "1" >
 				<maml:name>Value</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>The name of the artist(s).</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Object</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>PassThru</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>The target tag.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Tag</command:parameterValue>
 			</command:parameter>
@@ -3302,7 +4125,7 @@ C:\PS&gt;			</maml:introduction>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1">
 			<maml:name>Value</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>The name of the artist(s).</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
 			<dev:type>
@@ -3314,7 +4137,7 @@ C:\PS&gt;			</maml:introduction>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>PassThru</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -3322,10 +4145,10 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Path to media file.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
@@ -3391,10 +4214,10 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>The target tag.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Tag</command:parameterValue>
 			<dev:type>
@@ -3407,10 +4230,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String; PowerTag.Tag</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>If a String is given, it must point to a media file.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -3419,10 +4242,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>the artists(s)</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -3435,12 +4258,80 @@ C:\PS&gt;			</maml:introduction>
 	<maml:alertSet>
 		<maml:title></maml:title>
 		<maml:alert>
-			<maml:para></maml:para>
+			<maml:para>This is a wrapper CmdLet for Set-Tag.</maml:para>
 		</maml:alert>
 	</maml:alertSet>
 	<command:examples>
+		<command:example>
+			<maml:title>
+--------------  Example 1 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Set-Artists .\test.mp3 -Value &quot;new album name&quot;</dev:code>
+  			<dev:remarks>
+				<maml:para>Set the artist fpr a single file.</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
+		<command:example>
+			<maml:title>
+--------------  Example 2 --------------			</maml:title>
+			<maml:introduction>
+				<maml:para>C:\PS&gt;</maml:para>
+C:\PS&gt;			</maml:introduction>
+  			<dev:code>Set-Artists .\test.mp3 -Value @(&quot;first artist&quot;,&quot;second artist&quot;) -PassThru</dev:code>
+  			<dev:remarks>
+				<maml:para>Sets two artists for the specified file; modified files are shown because of -PassThru</maml:para>
+				<maml:para></maml:para>
+				<maml:para></maml:para>
+				<maml:para>
+				</maml:para>
+				<maml:para></maml:para>
+  			</dev:remarks>
+			<command:commandLines>
+				<command:commandLine>
+					<command:commandText>
+					</command:commandText>
+				</command:commandLine>
+			</command:commandLines>
+		</command:example>
 	</command:examples>
 	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Set-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Album</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Artists</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Genres</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Title</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Year</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
@@ -3448,7 +4339,7 @@ C:\PS&gt;			</maml:introduction>
 	<command:details>
 		<command:name>Set-Genres</command:name>
 		<maml:description>
-			<maml:para></maml:para>
+			<maml:para>Set the genre(s) of a tag.</maml:para>
 		</maml:description>
 		<maml:copyright>
            <maml:para />
@@ -3461,27 +4352,27 @@ C:\PS&gt;			</maml:introduction>
 	</command:details>
 	<maml:description>
 	<!--This is the Description section-->
-		<maml:para></maml:para>
+		<maml:para>This CmdLet sets the genres(s) of a tag.</maml:para>
 	</maml:description>
 	<command:syntax>		<command:syntaxItem>
 			<maml:name>Set-Genres</maml:name>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "1" >
 				<maml:name>Value</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>The name of the genre(s).</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Object</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>PassThru</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Path to media file.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >String</command:parameterValue>
 			</command:parameter>
@@ -3523,20 +4414,20 @@ C:\PS&gt;			</maml:introduction>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "1" >
 				<maml:name>Value</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>The name of the genre(s).</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Object</command:parameterValue>
 			</command:parameter>
 			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "false" position = "named" >
 				<maml:name>PassThru</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>The target tag.</maml:para>
 				</maml:description>
 			<command:parameterValue required="true" variableLength = "false" >Tag</command:parameterValue>
 			</command:parameter>
@@ -3578,7 +4469,7 @@ C:\PS&gt;			</maml:introduction>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1">
 			<maml:name>Value</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>The name of the genre(s).</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
 			<dev:type>
@@ -3590,7 +4481,7 @@ C:\PS&gt;			</maml:introduction>
 		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 			<maml:name>PassThru</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Writes the tag of target media file into pipe after processing.</maml:para>
 			</maml:description>
 			<dev:type>
 				<maml:name>SwitchParameter</maml:name>
@@ -3598,10 +4489,10 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>Path to media file.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 			<dev:type>
@@ -3667,10 +4558,10 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
-				<maml:para></maml:para>
+				<maml:para>The target tag.</maml:para>
 			</maml:description>
 			<command:parameterValue required="true" variableLength="false">Tag</command:parameterValue>
 			<dev:type>
@@ -3683,10 +4574,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:inputTypes>
 		<command:inputType>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String; PowerTag.Tag</maml:name>
 				<maml:uri/>
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>If a String is given, it must point to a media file.</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -3695,10 +4586,10 @@ C:\PS&gt;			</maml:introduction>
 	<command:returnValues>
 		<command:returnValue>
 			<dev:type>
-				<maml:name></maml:name>
+				<maml:name>System.String</maml:name>
 				<maml:uri />
 				<maml:description>
-					<maml:para></maml:para>
+					<maml:para>the genre(s)</maml:para>
 				</maml:description>
 			</dev:type>
 			<maml:description></maml:description>
@@ -3711,12 +4602,36 @@ C:\PS&gt;			</maml:introduction>
 	<maml:alertSet>
 		<maml:title></maml:title>
 		<maml:alert>
-			<maml:para></maml:para>
+			<maml:para>This is a wrapper CmdLet for Set-Tag.</maml:para>
 		</maml:alert>
 	</maml:alertSet>
 	<command:examples>
 	</command:examples>
 	<maml:relatedLinks>
+		<maml:navigationLink>
+			<maml:linkText>Set-Tag</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Album</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Artists</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Genres</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Title</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
+		<maml:navigationLink>
+			<maml:linkText>Set-Year</maml:linkText>
+			<maml:uri/>
+		</maml:navigationLink>
 	</maml:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
@@ -3999,8 +4914,8 @@ C:\PS&gt;			</maml:introduction>
 					<maml:para></maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
 				</maml:description>
@@ -4299,7 +5214,7 @@ C:\PS&gt;			</maml:introduction>
 					<maml:para></maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
@@ -4784,8 +5699,8 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
 				<maml:para></maml:para>
 			</maml:description>
@@ -4853,7 +5768,7 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
 				<maml:para></maml:para>
@@ -4940,8 +5855,8 @@ C:\PS&gt;			</maml:introduction>
 					<maml:para></maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
 				</maml:description>
@@ -4995,7 +5910,7 @@ C:\PS&gt;			</maml:introduction>
 					<maml:para></maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
@@ -5060,8 +5975,8 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
 				<maml:para></maml:para>
 			</maml:description>
@@ -5129,7 +6044,7 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
 				<maml:para></maml:para>
@@ -5216,8 +6131,8 @@ C:\PS&gt;			</maml:introduction>
 					<maml:para></maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
 				</maml:description>
@@ -5271,7 +6186,7 @@ C:\PS&gt;			</maml:introduction>
 					<maml:para></maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
@@ -5336,8 +6251,8 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
 				<maml:para></maml:para>
 			</maml:description>
@@ -5405,7 +6320,7 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
 				<maml:para></maml:para>
@@ -5492,8 +6407,8 @@ C:\PS&gt;			</maml:introduction>
 					<maml:para></maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
-				<maml:name>FileName</maml:name>
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue, ByPropertyName)" position = "1" >
+				<maml:name>FullName</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
 				</maml:description>
@@ -5547,7 +6462,7 @@ C:\PS&gt;			</maml:introduction>
 					<maml:para></maml:para>
 				</maml:description>
 			</command:parameter>
-			<command:parameter required = "true" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "named" >
+			<command:parameter required = "false" variableLength = "false" globbing = "false" pipelineInput = "true (ByValue)" position = "1" >
 				<maml:name>Tag</maml:name>
 				<maml:description>
 					<maml:para></maml:para>
@@ -5612,8 +6527,8 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
-			<maml:name>FileName</maml:name>
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+			<maml:name>FullName</maml:name>
 			<maml:description>
 				<maml:para></maml:para>
 			</maml:description>
@@ -5681,7 +6596,7 @@ C:\PS&gt;			</maml:introduction>
 			</dev:type>
 			<dev:defaultValue></dev:defaultValue>
 		</command:parameter>
-		<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="named">
+		<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="1">
 			<maml:name>Tag</maml:name>
 			<maml:description>
 				<maml:para></maml:para>

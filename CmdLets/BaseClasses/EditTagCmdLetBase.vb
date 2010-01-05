@@ -1,20 +1,24 @@
 ﻿Public MustInherit Class EditTagCmdLetBase : Inherits TagCmdLetBase
 
     Protected Overrides Sub ProcessTag(ByVal TargetTag As Tag)
-        Dim needSave = ProcessEditTag(TargetTag)
+        Dim msg = String.Format("perfom {0} on {1}", Me.Name, TargetTag)
+        If ShouldProcess(msg, msg, msg) Then
+            Dim needSave = ProcessEditTag(TargetTag)
 
-        If needSave _
-          AndAlso (Not WhatIfMode = WhatIfModes.true) _
-          AndAlso (WhatIfMode = WhatIfModes.false OrElse ShouldProcess(TargetTag.Path)) Then
-            TargetTag.Save()
+            If Me.Virtual.IsPresent Then
+                Me.WriteVerbose("virtual mode; do not save tag to disk.")
+                TargetTag.MarkDirty()
+            Else
+                If needSave Then
+                    TargetTag.Save()
+                Else
+                    TargetTag.MarkDirty()
+                End If
+            End If
         End If
 
-        If Me.PassThru.IsPresent Then
-            targetTag = PowerTag.Tag.Create(FileName)
-            Me.WriteObject(targetTag)
-        End If
+        If Me.PassThru.IsPresent Then Me.WriteObject(TargetTag)
     End Sub
-
 
     ''' <summary>is overriden by children to perform the edit task </summary>
     ''' <param name="TargetFile">file, that's tag will be edited</param>
@@ -29,16 +33,6 @@
         [false]
     End Enum
 
-    Private Shared myWhatifMode As WhatIfModes = WhatIfModes.none
-    Protected Shared Property WhatIfMode() As WhatIfModes
-        Get
-            Return myWhatifMode
-        End Get
-        Set(ByVal value As WhatIfModes)
-            myWhatifMode = value
-        End Set
-    End Property
-
     Private myPassThru As SwitchParameter
     <Parameter()> _
     Public Property PassThru() As SwitchParameter
@@ -47,6 +41,17 @@
         End Get
         Set(ByVal value As SwitchParameter)
             myPassThru = value
+        End Set
+    End Property
+
+    Private myVirtual As SwitchParameter
+    <Parameter()> _
+    Public Property Virtual() As SwitchParameter
+        Get
+            Return myVirtual
+        End Get
+        Set(ByVal value As SwitchParameter)
+            myVirtual = value
         End Set
     End Property
 

@@ -73,4 +73,18 @@
             Return Me.SessionState.Path.CurrentLocation.Path
         End Get
     End Property
+
+    Protected ReadOnly Property Name() As String
+        Get
+            Dim back As String
+            Dim attrs = Me.GetType.GetCustomAttributes(GetType(CmdletAttribute), True)
+            If attrs.Length = 0 Then
+                back = "unknown"
+            Else
+                Dim atrr = DirectCast(attrs(0), CmdletAttribute)
+                back = String.Format("{0}-{1}", atrr.VerbName, atrr.NounName)
+            End If
+            Return back
+        End Get
+    End Property
 End Class
