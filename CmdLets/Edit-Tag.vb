@@ -1,7 +1,7 @@
 ﻿Imports System.Text.RegularExpressions
-<Cmdlet(VerbsCommon.Set, TagNounes.Tag, _
-        SupportsShouldProcess:=True, DefaultParameterSetName:=Set_Tag.DefaultParameterSetName)> _
-Public Class Set_Tag : Inherits EditTagCmdLetBase
+<Cmdlet(tagVerbs.Edit, TagNounes.Tag, _
+        SupportsShouldProcess:=True, DefaultParameterSetName:=Edit_Tag.DefaultParameterSetName)> _
+Public Class Edit_Tag : Inherits EditTagCmdLetBase
     Private Const NoProperryFoundError As String = "no property found for parameter '{0}'"
     Private Const Uint32ParseError As String = "parameter '{0}': cannot parse value '{1}' into UInt32"
     Private Const UnknownTypeError As String = "parameter '{0}': unknown type '{1}'"
@@ -135,7 +135,7 @@ Public Class Set_Tag : Inherits EditTagCmdLetBase
         Dim back As Boolean = False
         Dim foundMore As Boolean = False
         Dim nameLower = Name.ToLower.Trim
-        For Each prop In GetType(Set_Tag).GetProperties
+        For Each prop In GetType(Edit_Tag).GetProperties
             Dim attr = prop.GetCustomAttributes(GetType(TaglibParameterAttribute), False)
             If attr.Length = 0 Then Continue For
             Dim propName = prop.Name.ToLower

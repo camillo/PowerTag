@@ -1,6 +1,8 @@
 ﻿Public MustInherit Class GetTagWrapperBase : Inherits TagCmdLetBase
-    Protected Const GetChildrenCommandPattern As String = "Get-ChildItem | {0}"
+    Protected Const GetChildrenCommandPattern As String = "Get-ChildItem {0}| {1}"
     Protected Const CommandPattern As String = "Get-Tag -Fullname ""{0}"" "
+    Protected Const RecursiveParameter As String = "-Recurse"
+    Protected Const UniqueModifier As String = "| Select-Object -Unique"
 
     Protected Const TagLibPropertyNotFoundMessage As String = "cannot find tag property '{0}'"
 
@@ -8,7 +10,8 @@
     Protected Overrides Sub DoProcessRecord()
         Select Case Me.ParameterSetName
             Case NoParameterParameterSetName
-                Dim command = String.Format(GetChildrenCommandPattern, Me.Name)
+                Dim command = String.Format(GetChildrenCommandPattern, Me.GetRecursivString, Me.Name)
+                If Me.Unique.IsPresent Then command = String.Concat(command, UniqueModifier)
                 Dim back = ExecuteNewPipeline(command, Nothing)
                 Me.WriteObject(back, True)
             Case Else
@@ -44,5 +47,41 @@
         End If
         Return back
     End Function
+
+    Private Function GetRecursivString() As String
+        Dim back As String
+        If Me.Recurse.IsPresent Then
+            back = RecursiveParameter
+        Else
+            back = String.Empty
+        End If
+        Return back
+    End Function
+#End Region
+
+#Region "parameter"
+
+    Private myRecurse As SwitchParameter
+    <Parameter()> _
+    Public Property Recurse() As SwitchParameter
+        Get
+            Return myRecurse
+        End Get
+        Set(ByVal value As SwitchParameter)
+            myRecurse = value
+        End Set
+    End Property
+
+    Private myUnique As SwitchParameter
+    <Parameter()> _
+    Public Property Unique() As SwitchParameter
+        Get
+            Return myUnique
+        End Get
+        Set(ByVal value As SwitchParameter)
+            myUnique = value
+        End Set
+    End Property
+
 #End Region
 End Class

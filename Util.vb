@@ -22,6 +22,16 @@
         Return Item.Replace("""", """""")
     End Function
 
+    Public Shared Function ToArray(Of T)(ByVal Items As Collections.ObjectModel.Collection(Of PSObject)) As IEnumerable(Of T)
+        Dim back = New List(Of T)
+        For Each item In Items
+            Dim obj = item.BaseObject
+            If Not TypeOf obj Is T Then Throw New InternalException("unable to cast object {0} from type {1} to {2}", obj, obj.GetType.FullName, GetType(T).FullName)
+            back.Add(DirectCast(obj, T))
+        Next
+        Return back.ToArray
+    End Function
+#Region "debug only"
 #If DEBUG Then
     ''' <summary>this is a helperclass to generate code. No need to compile it into relase binaries. </summary>
     Friend Shared Function GenerateWrapper() As String
@@ -50,5 +60,6 @@
         Return back.ToString
     End Function
 #End If
+#End Region
 
 End Class

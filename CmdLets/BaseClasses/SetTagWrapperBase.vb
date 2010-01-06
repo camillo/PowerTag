@@ -21,7 +21,7 @@
         Dim wrappedPropertyName = Me.Noun
 
         Dim taglibKvp As KeyValuePair(Of Reflection.PropertyInfo, TaglibParameterAttribute) = Nothing
-        If Not Set_Tag.TryGetTaglibParemeter(wrappedPropertyName, taglibKvp) Then _
+        If Not Edit_Tag.TryGetTaglibParemeter(wrappedPropertyName, taglibKvp) Then _
             Throw New InternalException(PropertyNotFoundMessage, wrappedPropertyName)
 
         Dim input As IEnumerable = CreateInputObject(taglibKvp.Key.PropertyType, wrappedPropertyName)

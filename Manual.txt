@@ -1,1 +1,0 @@
-﻿PowerTag is a powershell SnapIn, that provides CmdLets to query and manipulate tags from media files (.mp3, .ogg, .avi ect...).

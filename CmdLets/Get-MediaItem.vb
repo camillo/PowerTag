@@ -7,12 +7,12 @@ Public Class Get_MediaItem : Inherits CmdLetBase
             Dim back = New List(Of System.IO.FileInfo)
             Dim fullName = Me.FullName
             If String.IsNullOrEmpty(fullName) Then
-                ScanDirecectory(Me.SessionPath, back, Me.Recursive.IsPresent)
+                ScanDirecectory(Me.SessionPath, back, Me.Recurse.IsPresent)
             ElseIf System.IO.File.Exists(fullName) Then
                 If Tag.HasSupportedExtension(fullName) Then back.Add(New System.IO.FileInfo(fullName))
-                If Me.Recursive.IsPresent Then WriteVerbose("FullName points to a file; recursive parameter is ignored")
+                If Me.Recurse.IsPresent Then WriteVerbose("FullName points to a file; recursive parameter is ignored")
             ElseIf System.IO.Directory.Exists(fullName) Then
-                ScanDirecectory(fullName, back, Me.Recursive.IsPresent)
+                ScanDirecectory(fullName, back, Me.Recurse.IsPresent)
             Else
                 Throw New IO.FileNotFoundException("Parameter FullName does not point to a file or directory", fullName)
             End If
@@ -41,14 +41,14 @@ Public Class Get_MediaItem : Inherits CmdLetBase
 #End Region
 
 #Region "parameter"
-    Private myRecursive As SwitchParameter
+    Private myRecurse As SwitchParameter
     <Parameter()> _
-    Public Property Recursive() As SwitchParameter
+    Public Property Recurse() As SwitchParameter
         Get
-            Return myRecursive
+            Return myRecurse
         End Get
         Set(ByVal value As SwitchParameter)
-            myRecursive = value
+            myRecurse = value
         End Set
     End Property
 

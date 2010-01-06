@@ -95,7 +95,7 @@
     <Compile Include="CmdLets\BaseClasses\EditTagCmdLetBase.vb" />
     <Compile Include="CmdLets\Reset-Tag.vb" />
     <Compile Include="CmdLets\Save-Tag.vb" />
-    <Compile Include="CmdLets\Set-Tag.vb" />
+    <Compile Include="CmdLets\Edit-Tag.vb" />
     <Compile Include="CmdLets\Get-Tag.vb" />
     <Compile Include="Exceptions\InternalException.vb" />
     <Compile Include="Exceptions\TagLibException.vb" />
@@ -181,7 +181,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Manual.txt" />
+    <Content Include="README.txt" />
     <Content Include="PowerTag.dll-Help.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
